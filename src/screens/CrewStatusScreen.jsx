@@ -122,7 +122,7 @@ export default function CrewStatusScreen({ setPage, crew = [] }) {
         <div className="cs-title-block">
           <div className="cs-eyebrow">
             <Users size={13} className="cs-icon-cyan" />
-            <span>EXPEDITION 07 // FLIGHT CREW DOSSIERS</span>
+            <span>Expedition 07 · flight crew dossiers</span>
           </div>
           <h1>Crew Status & Readiness</h1>
           <p>
@@ -132,14 +132,14 @@ export default function CrewStatusScreen({ setPage, crew = [] }) {
 
         <div className="cs-header-stats">
           <div className="cs-stat-box">
-            <small>CREW ON BOARD</small>
-            <strong>{String(crew.length).padStart(2, '0')} <span>ASTRONAUTS</span></strong>
+            <small>Crew on board</small>
+            <strong>{String(crew.length).padStart(2, '0')} <span>Astronauts</span></strong>
           </div>
           <div className="cs-stat-box">
-            <small>MISSION READINESS</small>
-            <strong className="good">3 NOMINAL / 1 MONITOR</strong>
+            <small>Mission readiness</small>
+            <strong className="good">3 Nominal / 1 monitor</strong>
           </div>
-          <span className="cs-sim-tag">SIMULATED CREW DOSSIERS</span>
+          <span className="cs-sim-tag">Simulated crew dossiers</span>
         </div>
       </header>
 
@@ -153,7 +153,7 @@ export default function CrewStatusScreen({ setPage, crew = [] }) {
           </div>
           <div>
             <div className="cs-privacy-title">
-              <strong>MEDICAL TEAM ACCESS: {medicalAccess ? 'AUTHORIZED (FULL CLINICAL DOSSIER)' : 'RESTRICTED (FLIGHT DECK REDACTED VIEW)'}</strong>
+              <strong>MEDICAL TEAM ACCESS: {medicalAccess ? 'Authorized (full clinical dossier)' : 'Restricted (flight deck redacted view)'}</strong>
             </div>
             <p>
               {medicalAccess
@@ -166,12 +166,12 @@ export default function CrewStatusScreen({ setPage, crew = [] }) {
         <div className="cs-privacy-action">
           <button
             className="cs-toggle-access-btn"
-            style={{ background: 'rgba(239, 68, 68, 0.15)', borderColor: 'rgba(239, 68, 68, 0.35)', color: '#fca5a5' }}
+            style={{ background: 'rgba(229,96,79,0.15)', borderColor: 'rgba(229,96,79,0.35)', color: 'var(--danger)' }}
             onClick={() => setPage('admin-crew')}
             aria-label="Open Admin Operations Console"
           >
             <ShieldCheck size={14} />
-            <span>ADMIN CREW OPERATIONS</span>
+            <span>Admin crew operations</span>
           </button>
           <button
             className={`cs-toggle-access-btn ${medicalAccess ? 'auth' : 'restr'}`}
@@ -181,12 +181,12 @@ export default function CrewStatusScreen({ setPage, crew = [] }) {
             {medicalAccess ? (
               <>
                 <EyeOff size={14} />
-                <span>RESTRICT ACCESS (MASK PRIVATE DATA)</span>
+                <span>Restrict access (mask private data)</span>
               </>
             ) : (
               <>
                 <Eye size={14} />
-                <span>AUTHENTICATE FLIGHT SURGEON ACCESS</span>
+                <span>Authenticate flight surgeon access</span>
               </>
             )}
           </button>
@@ -257,13 +257,13 @@ export default function CrewStatusScreen({ setPage, crew = [] }) {
 
             <div className="cs-helmet-preview">
               <canvas ref={helmetCanvasRef} className="cs-helmet-canvas" aria-label="3D Astronaut EVA Space Helmet & Suit Display" />
-              <span className="cs-helmet-hint">DRAG TO ROTATE 3D SUIT</span>
+              <span className="cs-helmet-hint">Drag to rotate 3D suit</span>
             </div>
 
             <div className="cs-hero-action">
               <button className="cs-btn-inspect-twin" onClick={() => setPage('health')}>
                 <Activity size={15} />
-                <span>INSPECT 3D DIGITAL TWIN</span>
+                <span>Inspect 3D digital twin</span>
                 <ChevronRight size={14} />
               </button>
             </div>
@@ -272,19 +272,19 @@ export default function CrewStatusScreen({ setPage, crew = [] }) {
           {/* Operational Metrics Bar */}
           <div className="cs-operational-metrics">
             <div className="cs-op-item">
-              <small>CUMULATIVE FLIGHT TIME</small>
+              <small>Cumulative flight time</small>
               <strong>{activeProfile.flightTime}</strong>
             </div>
             <div className="cs-op-item">
-              <small>EVA SPACEWALK DURATION</small>
+              <small>EVA spacewalk duration</small>
               <strong>{activeProfile.evaTime}</strong>
             </div>
             <div className="cs-op-item">
-              <small>SPACE RADIATION DOSE</small>
+              <small>Space radiation dose</small>
               <strong>{activeProfile.radiation}</strong>
             </div>
             <div className="cs-op-item">
-              <small>EXERCISE COUNTERMEASURES</small>
+              <small>Exercise countermeasures</small>
               <strong className="teal">{activeProfile.exerciseAdherence} ADHERENCE</strong>
             </div>
           </div>
@@ -294,7 +294,7 @@ export default function CrewStatusScreen({ setPage, crew = [] }) {
             <div className="cs-vital-item cyan">
               <HeartPulse size={16} />
               <div>
-                <small>HEART RATE</small>
+                <small>Heart rate</small>
                 <strong>{activeMember.hr} <abbr>BPM</abbr></strong>
               </div>
               <span className="cs-sub-metric">Resting sinus</span>
@@ -312,7 +312,7 @@ export default function CrewStatusScreen({ setPage, crew = [] }) {
             <div className="cs-vital-item teal">
               <Moon size={16} />
               <div>
-                <small>CIRCADIAN SLEEP</small>
+                <small>Circadian sleep</small>
                 <strong>{activeMember.sleep}</strong>
               </div>
               <span className="cs-sub-metric">94% Efficiency</span>
@@ -324,7 +324,7 @@ export default function CrewStatusScreen({ setPage, crew = [] }) {
             <div className="cs-notes-header">
               <Stethoscope size={16} className="cs-icon-cyan" />
               <div>
-                <span className="cs-eyebrow">CLINICAL OBSERVATION LOG</span>
+                <span className="cs-eyebrow">Clinical observation log</span>
                 <h3>Physiological Space Adaptation Status</h3>
               </div>
             </div>
@@ -336,33 +336,33 @@ export default function CrewStatusScreen({ setPage, crew = [] }) {
             <div className="cs-confidential-header">
               <div className="cs-conf-title">
                 {medicalAccess ? <ShieldCheck size={16} className="cs-icon-teal" /> : <LockKeyhole size={16} className="cs-icon-amber" />}
-                <span>CONFIDENTIAL BEHAVIORAL & BIOMARKER LOGS</span>
+                <span>Confidential behavioral & biomarker logs</span>
               </div>
               <span className="cs-conf-tag">
-                {medicalAccess ? 'UNRESTRICTED CLINICAL ACCESS' : 'CONFIDENTIAL // REDACTED'}
+                {medicalAccess ? 'Unrestricted clinical access' : 'Confidential · redacted'}
               </span>
             </div>
 
             {medicalAccess ? (
               <div className="cs-conf-body">
                 <div className="cs-conf-section">
-                  <small>BEHAVIORAL & PSYCHOLOGICAL WELLNESS (LOCAL LOG)</small>
+                  <small>Behavioral & psychological wellness (local log)</small>
                   <p>{activeProfile.psychNotes}</p>
                 </div>
                 <div className="cs-conf-section">
-                  <small>ADVANCED BIOMARKER MATRIX (SIMULATED SAMPLE)</small>
+                  <small>Advanced biomarker matrix (simulated sample)</small>
                   <code>{activeProfile.confidentialDetails}</code>
                 </div>
               </div>
             ) : (
               <div className="cs-redacted-overlay">
                 <LockKeyhole size={28} className="cs-icon-amber" />
-                <strong>CONFIDENTIAL CLINICAL RECORD REDACTED</strong>
+                <strong>Confidential clinical record redacted</strong>
                 <p>
                   Health data privacy controls active. Detailed behavioral assessments and lab values require Flight Surgeon authentication.
                 </p>
                 <button className="cs-btn-unlock" onClick={() => setMedicalAccess(true)}>
-                  AUTHENTICATE CLEARANCE
+                  Authenticate clearance
                 </button>
               </div>
             )}

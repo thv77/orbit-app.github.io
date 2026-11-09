@@ -57,11 +57,11 @@ export default function CrewAdminHub({ setPage }) {
           style={{
             maxWidth: '500px',
             margin: '4rem auto',
-            background: 'rgba(15, 23, 42, 0.85)',
-            border: '1px solid rgba(239, 68, 68, 0.35)',
+            background: 'var(--ink-2)',
+            border: '1px solid rgba(229,96,79,0.35)',
             borderRadius: '12px',
             padding: '2.5rem 2rem',
-            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)',
+            boxShadow: '0 20px 40px rgba(0,0,0,.35)',
           }}
         >
           <div
@@ -69,27 +69,27 @@ export default function CrewAdminHub({ setPage }) {
               width: '64px',
               height: '64px',
               borderRadius: '50%',
-              background: 'rgba(239, 68, 68, 0.15)',
+              background: 'rgba(229,96,79,0.15)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto 1.5rem',
             }}
           >
-            <ShieldAlert size={36} color="#ef4444" />
+            <ShieldAlert size={36} color="var(--danger)" />
           </div>
           <h2
             style={{
-              color: '#f87171',
+              color: 'var(--danger)',
               fontSize: '1.15rem',
               letterSpacing: '0.05em',
               marginBottom: '0.75rem',
               fontFamily: 'var(--font-mono, monospace)',
             }}
           >
-            CLEARANCE RESTRICTED · FLIGHT DIRECTOR REQUIRED
+            Clearance restricted · flight director required
           </h2>
-          <p style={{ color: '#94a3b8', fontSize: '0.875rem', lineHeight: 1.6, marginBottom: '1.75rem' }}>
+          <p style={{ color: 'var(--text-2)', fontSize: '0.875rem', lineHeight: 1.6, marginBottom: '1.75rem' }}>
             Flight Operations Crew Provisioning & Registration Triage is restricted to active Flight Directors.
             Personnel must complete administrative verification before accessing mission consoles.
           </p>
@@ -204,12 +204,12 @@ export default function CrewAdminHub({ setPage }) {
 
         <div className="admin-stats-strip">
           <div className="admin-stat-card">
-            <span>ACTIVE CREW</span>
+            <span>Active crew</span>
             <strong>{crewList.filter((c) => c.state !== 'ARCHIVED' && c.isActive !== false).length}</strong>
           </div>
           <div className="admin-stat-card">
-            <span>PENDING TRIAGE</span>
-            <strong style={{ color: pendingCount > 0 ? '#f59e0b' : '#10b981' }}>{pendingCount}</strong>
+            <span>Pending triage</span>
+            <strong style={{ color: pendingCount > 0 ? 'var(--warn)' : 'rgba(76,195,138,0.6)' }}>{pendingCount}</strong>
           </div>
           <button
             className="btn-table-action"
@@ -225,11 +225,11 @@ export default function CrewAdminHub({ setPage }) {
       {!isAdmin && (
         <div
           style={{
-            background: 'rgba(239, 68, 68, 0.12)',
-            border: '1px solid rgba(239, 68, 68, 0.35)',
+            background: 'rgba(229,96,79,0.12)',
+            border: '1px solid rgba(229,96,79,0.35)',
             borderRadius: '8px',
             padding: '0.75rem 1.25rem',
-            color: '#fca5a5',
+            color: 'var(--danger)',
             fontSize: '0.82rem',
             display: 'flex',
             alignItems: 'center',
@@ -242,8 +242,8 @@ export default function CrewAdminHub({ setPage }) {
           {isDemoMode && (
             <button
               style={{
-                background: 'rgba(239, 68, 68, 0.25)',
-                border: '1px solid rgba(239, 68, 68, 0.5)',
+                background: 'rgba(229,96,79,0.25)',
+                border: '1px solid rgba(229,96,79,0.5)',
                 color: '#ffffff',
                 padding: '0.25rem 0.65rem',
                 borderRadius: '4px',
@@ -262,11 +262,11 @@ export default function CrewAdminHub({ setPage }) {
       {successMessage && (
         <div
           style={{
-            background: 'rgba(16, 185, 129, 0.14)',
-            border: '1px solid rgba(16, 185, 129, 0.4)',
+            background: 'rgba(76,195,138,0.08)',
+            border: '1px solid rgba(76,195,138,0.24)',
             borderRadius: '8px',
             padding: '0.75rem 1.25rem',
-            color: '#34d399',
+            color: 'var(--ok)',
             fontSize: '0.84rem',
             display: 'flex',
             alignItems: 'center',
@@ -320,7 +320,7 @@ export default function CrewAdminHub({ setPage }) {
           {pendingRequests.length === 0 ? (
             <div className="triage-empty">
               <CheckCircle2 size={44} />
-              <h3 style={{ margin: 0, color: '#f9fafb' }}>All Registrations Triaged</h3>
+              <h3 style={{ margin: 0, color: 'var(--text)' }}>All Registrations Triaged</h3>
               <p style={{ margin: 0, maxWidth: '420px', fontSize: '0.84rem' }}>
                 There are no pending astronaut candidate requests in the verification queue. Newly submitted
                 self-registrations will appear here for administrative approval.
@@ -335,24 +335,24 @@ export default function CrewAdminHub({ setPage }) {
                       <h3>{req.full_name || req.profiles?.full_name || 'Candidate ' + req.requested_callsign}</h3>
                       <span>{req.email || req.profiles?.email || 'email pending'}</span>
                     </div>
-                    <span className="topbar-auth-role pending">PENDING REVIEW</span>
+                    <span className="topbar-auth-role pending">Pending review</span>
                   </div>
 
                   <div className="triage-details-box">
                     <div className="triage-details-row">
-                      <span>REQUESTED CALLSIGN:</span>
+                      <span>Requested callsign:</span>
                       <strong>{req.requested_callsign || 'TBD'}</strong>
                     </div>
                     <div className="triage-details-row">
-                      <span>OPERATIONAL ROLE:</span>
+                      <span>Operational role:</span>
                       <span>{req.requested_role || 'MISSION SPECIALIST'}</span>
                     </div>
                     <div className="triage-details-row">
-                      <span>SPACE AGENCY:</span>
+                      <span>Space agency:</span>
                       <span>{req.agency || 'NASA'}</span>
                     </div>
                     <div className="triage-details-row">
-                      <span>SUBMITTED AT:</span>
+                      <span>Submitted at:</span>
                       <span>{new Date(req.created_at).toLocaleString()}</span>
                     </div>
                   </div>
@@ -385,7 +385,7 @@ export default function CrewAdminHub({ setPage }) {
             <h3>Expedition 07 Personnel Roster</h3>
             <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
               <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-                <Search size={15} style={{ position: 'absolute', left: '0.7rem', color: '#9ca3af' }} />
+                <Search size={15} style={{ position: 'absolute', left: '0.7rem', color: 'var(--text-2)' }} />
                 <input
                   type="text"
                   placeholder="Filter personnel..."
@@ -403,7 +403,7 @@ export default function CrewAdminHub({ setPage }) {
               </div>
               <button
                 className="btn-table-action"
-                style={{ background: 'rgba(56, 189, 248, 0.15)', borderColor: 'rgba(56, 189, 248, 0.4)', color: '#38bdf8' }}
+                style={{ background: 'rgba(98,212,200,0.15)', borderColor: 'rgba(98,212,200,0.4)', color: 'var(--accent)' }}
                 onClick={() => setActiveTab('add')}
               >
                 <Plus size={15} /> Add Crew
@@ -432,12 +432,12 @@ export default function CrewAdminHub({ setPage }) {
                       <div className={`crew-row-avatar ${c.color || 'cyan'}`}>{c.initials}</div>
                       <div>
                         <strong>{c.name}</strong>
-                        <div style={{ fontSize: '0.72rem', color: '#9ca3af' }}>{c.note}</div>
+                        <div style={{ fontSize: '0.72rem', color: 'var(--text-2)' }}>{c.note}</div>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <span style={{ fontFamily: 'monospace', color: '#38bdf8', fontWeight: 600 }}>
+                    <span style={{ fontFamily: 'monospace', color: 'var(--accent)', fontWeight: 600 }}>
                       {c.callsign || 'UNASSIGNED'}
                     </span>
                   </td>
@@ -453,16 +453,16 @@ export default function CrewAdminHub({ setPage }) {
                         fontWeight: 600,
                         background:
                           c.state === 'ARCHIVED'
-                            ? 'rgba(107, 114, 128, 0.2)'
+                            ? 'rgba(169,179,191,0.2)'
                             : c.state === 'MONITOR'
-                            ? 'rgba(245, 158, 11, 0.15)'
-                            : 'rgba(16, 185, 129, 0.15)',
+                            ? 'rgba(224,164,60,0.15)'
+                            : 'rgba(76,195,138,0.09)',
                         color:
                           c.state === 'ARCHIVED'
-                            ? '#9ca3af'
+                            ? 'var(--text-2)'
                             : c.state === 'MONITOR'
-                            ? '#fbbf24'
-                            : '#34d399',
+                            ? 'var(--warn)'
+                            : 'var(--ok)',
                       }}
                     >
                       {c.state || 'NOMINAL'}
@@ -500,8 +500,8 @@ export default function CrewAdminHub({ setPage }) {
         <div style={{ maxWidth: '640px', margin: '0 auto', width: '100%' }}>
           <div
             style={{
-              background: 'linear-gradient(180deg, rgba(17, 24, 39, 0.85) 0%, rgba(11, 15, 25, 0.95) 100%)',
-              border: '1px solid rgba(56, 189, 248, 0.25)',
+              background: 'var(--ink-2)',
+              border: '1px solid rgba(98,212,200,0.25)',
               borderRadius: '12px',
               padding: '1.75rem',
             }}
@@ -509,7 +509,7 @@ export default function CrewAdminHub({ setPage }) {
             <h2 style={{ fontSize: '1.2rem', color: '#ffffff', margin: '0 0 0.5rem 0' }}>
               Pre-Provision Astronaut Profile
             </h2>
-            <p style={{ fontSize: '0.84rem', color: '#9ca3af', margin: '0 0 1.5rem 0' }}>
+            <p style={{ fontSize: '0.84rem', color: 'var(--text-2)', margin: '0 0 1.5rem 0' }}>
               Administrators can register an astronaut profile in advance. The profile can later be claimed or
               linked to an authenticated user account.
             </p>
@@ -552,11 +552,11 @@ export default function CrewAdminHub({ setPage }) {
                     value={newRole}
                     onChange={(e) => setNewRole(e.target.value)}
                   >
-                    <option value="MISSION COMMANDER">MISSION COMMANDER</option>
-                    <option value="FLIGHT SURGEON">FLIGHT SURGEON</option>
-                    <option value="MISSION SPECIALIST">MISSION SPECIALIST</option>
-                    <option value="SYSTEMS ENGINEER">SYSTEMS ENGINEER</option>
-                    <option value="PAYLOAD SCIENTIST">PAYLOAD SCIENTIST</option>
+                    <option value="MISSION COMMANDER">Mission commander</option>
+                    <option value="FLIGHT SURGEON">Flight surgeon</option>
+                    <option value="MISSION SPECIALIST">Mission specialist</option>
+                    <option value="SYSTEMS ENGINEER">Systems engineer</option>
+                    <option value="PAYLOAD SCIENTIST">Payload scientist</option>
                   </select>
                 </div>
 
@@ -629,7 +629,7 @@ export default function CrewAdminHub({ setPage }) {
         <div style={{ maxWidth: '640px', margin: '0 auto', width: '100%' }}>
           <div
             style={{
-              background: 'linear-gradient(180deg, rgba(17, 24, 39, 0.85) 0%, rgba(11, 15, 25, 0.95) 100%)',
+              background: 'var(--ink-2)',
               border: '1px solid rgba(255, 255, 255, 0.1)',
               borderRadius: '12px',
               padding: '1.75rem',
@@ -642,7 +642,7 @@ export default function CrewAdminHub({ setPage }) {
               <h2 style={{ fontSize: '1.2rem', color: '#ffffff', margin: '0 0 0.5rem 0' }}>
                 Generate Astronaut Claim Invitation
               </h2>
-              <p style={{ fontSize: '0.84rem', color: '#9ca3af', margin: 0 }}>
+              <p style={{ fontSize: '0.84rem', color: 'var(--text-2)', margin: 0 }}>
                 Generate a secure, single-use onboarding link that allows an astronaut to set up their password
                 and immediately claim their pre-provisioned flight roster profile.
               </p>
@@ -675,7 +675,7 @@ export default function CrewAdminHub({ setPage }) {
               <div
                 style={{
                   background: 'rgba(0,0,0,0.4)',
-                  border: '1px solid rgba(56, 189, 248, 0.3)',
+                  border: '1px solid rgba(98,212,200,0.3)',
                   borderRadius: '8px',
                   padding: '1rem',
                   display: 'flex',
@@ -683,14 +683,14 @@ export default function CrewAdminHub({ setPage }) {
                   gap: '0.5rem',
                 }}
               >
-                <span style={{ fontSize: '0.72rem', color: '#9ca3af', fontFamily: 'monospace' }}>
-                  SECURE CLAIM INVITATION URL:
+                <span style={{ fontSize: '0.72rem', color: 'var(--text-2)', fontFamily: 'monospace' }}>
+                  Secure claim invitation URL:
                 </span>
                 <div
                   style={{
                     fontFamily: 'monospace',
                     fontSize: '0.8rem',
-                    color: '#38bdf8',
+                    color: 'var(--accent)',
                     wordBreak: 'break-all',
                     background: 'rgba(255,255,255,0.03)',
                     padding: '0.5rem 0.75rem',

@@ -103,7 +103,7 @@ export default function AuthGatewayScreen() {
       style={{
         minHeight: '100vh',
         width: '100vw',
-        background: 'radial-gradient(ellipse at top, #0f172a 0%, #030712 70%, #020408 100%)',
+        background: 'var(--ink-0)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -111,7 +111,7 @@ export default function AuthGatewayScreen() {
         padding: '2rem 1rem',
         position: 'relative',
         overflow: 'hidden',
-        color: '#f8fafc',
+        color: 'var(--text)',
         fontFamily: 'var(--font-sans, system-ui, sans-serif)',
       }}
     >
@@ -121,7 +121,7 @@ export default function AuthGatewayScreen() {
           position: 'absolute',
           inset: 0,
           backgroundImage:
-            'radial-gradient(rgba(56, 189, 248, 0.08) 1px, transparent 1px), radial-gradient(rgba(14, 165, 233, 0.04) 1px, transparent 1px)',
+            'none',
           backgroundSize: '32px 32px',
           backgroundPosition: '0 0, 16px 16px',
           pointerEvents: 'none',
@@ -136,7 +136,7 @@ export default function AuthGatewayScreen() {
           width: '600px',
           height: '600px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(2, 132, 199, 0.12) 0%, transparent 70%)',
+          background: 'transparent',
           top: '-150px',
           pointerEvents: 'none',
         }}
@@ -147,11 +147,10 @@ export default function AuthGatewayScreen() {
         style={{
           width: '100%',
           maxWidth: '500px',
-          background: 'rgba(15, 23, 42, 0.88)',
-          backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(56, 189, 248, 0.28)',
+          background: 'var(--ink-2)',
+          border: '1px solid rgba(98,212,200,0.28)',
           borderRadius: '16px',
-          boxShadow: '0 25px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(56, 189, 248, 0.12)',
+          boxShadow: '0 25px 60px rgba(0,0,0,.35)',
           padding: '2rem 2.25rem',
           position: 'relative',
           zIndex: 10,
@@ -166,15 +165,15 @@ export default function AuthGatewayScreen() {
               height: '56px',
               margin: '0 auto 1rem',
               borderRadius: '50%',
-              background: 'linear-gradient(135deg, rgba(2, 132, 199, 0.4) 0%, rgba(56, 189, 248, 0.25) 100%)',
-              border: '1px solid rgba(56, 189, 248, 0.5)',
+              background: 'rgba(98,212,200,0.24)',
+              border: '1px solid rgba(98,212,200,0.5)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 0 24px rgba(56, 189, 248, 0.3)',
+              boxShadow: 'none',
             }}
           >
-            <Orbit size={30} color="#38bdf8" />
+            <Orbit size={30} color="var(--accent)" />
           </div>
 
           <h1
@@ -186,13 +185,13 @@ export default function AuthGatewayScreen() {
               color: '#ffffff',
             }}
           >
-            ORBIT <span style={{ color: '#38bdf8' }}>HEALTH</span>
+            ORBIT <span style={{ color: 'var(--accent)' }}>HEALTH</span>
           </h1>
           <p
             style={{
               margin: '0.35rem 0 0',
               fontSize: '0.74rem',
-              color: '#94a3b8',
+              color: 'var(--text-2)',
               letterSpacing: '0.08em',
               fontFamily: 'var(--font-mono, monospace)',
               textTransform: 'uppercase',
@@ -207,7 +206,7 @@ export default function AuthGatewayScreen() {
               style={{ display: 'inline-flex', padding: '0.25rem 0.65rem', fontSize: '0.68rem' }}
             >
               <ShieldCheck size={12} />
-              {isDemoMode ? 'OFFLINE DEMO SIMULATION' : 'LIVE SUPABASE PLATFORM'}
+              {isDemoMode ? 'Offline demo simulation' : 'Live Supabase platform'}
             </span>
           </div>
         </div>
@@ -237,15 +236,15 @@ export default function AuthGatewayScreen() {
               border: 'none',
               background:
                 activeTab === 'REGISTER'
-                  ? 'linear-gradient(135deg, rgba(2, 132, 199, 0.35) 0%, rgba(56, 189, 248, 0.25) 100%)'
+                  ? 'rgba(98,212,200,0.21)'
                   : 'transparent',
-              color: activeTab === 'REGISTER' ? '#38bdf8' : '#94a3b8',
+              color: activeTab === 'REGISTER' ? 'var(--accent)' : 'var(--text-2)',
               fontWeight: activeTab === 'REGISTER' ? 700 : 500,
               fontSize: '0.82rem',
               letterSpacing: '0.04em',
               cursor: 'pointer',
               transition: 'all 0.15s ease',
-              borderBottom: activeTab === 'REGISTER' ? '2px solid #38bdf8' : '2px solid transparent',
+              borderBottom: activeTab === 'REGISTER' ? '2px solid var(--accent)' : '2px solid transparent',
               fontFamily: 'var(--font-mono, monospace)',
               display: 'flex',
               alignItems: 'center',
@@ -254,7 +253,7 @@ export default function AuthGatewayScreen() {
             }}
           >
             <UserPlus size={15} />
-            ENLIST ASTRONAUT
+            Enlist astronaut
           </button>
           <button
             type="button"
@@ -268,15 +267,15 @@ export default function AuthGatewayScreen() {
               border: 'none',
               background:
                 activeTab === 'LOGIN'
-                  ? 'linear-gradient(135deg, rgba(2, 132, 199, 0.35) 0%, rgba(56, 189, 248, 0.25) 100%)'
+                  ? 'rgba(98,212,200,0.21)'
                   : 'transparent',
-              color: activeTab === 'LOGIN' ? '#38bdf8' : '#94a3b8',
+              color: activeTab === 'LOGIN' ? 'var(--accent)' : 'var(--text-2)',
               fontWeight: activeTab === 'LOGIN' ? 700 : 500,
               fontSize: '0.82rem',
               letterSpacing: '0.04em',
               cursor: 'pointer',
               transition: 'all 0.15s ease',
-              borderBottom: activeTab === 'LOGIN' ? '2px solid #38bdf8' : '2px solid transparent',
+              borderBottom: activeTab === 'LOGIN' ? '2px solid var(--accent)' : '2px solid transparent',
               fontFamily: 'var(--font-mono, monospace)',
               display: 'flex',
               alignItems: 'center',
@@ -285,7 +284,7 @@ export default function AuthGatewayScreen() {
             }}
           >
             <LogIn size={15} />
-            RETURNING PIN LOGIN
+            Returning PIN login
           </button>
         </div>
 
@@ -304,10 +303,10 @@ export default function AuthGatewayScreen() {
           <div
             style={{
               padding: '0.75rem 1rem',
-              background: 'rgba(16, 185, 129, 0.12)',
-              border: '1px solid rgba(16, 185, 129, 0.35)',
+              background: 'rgba(76,195,138,0.07)',
+              border: '1px solid rgba(76,195,138,0.21)',
               borderRadius: '8px',
-              color: '#34d399',
+              color: 'var(--ok)',
               fontSize: '0.82rem',
               display: 'flex',
               alignItems: 'center',
@@ -330,17 +329,17 @@ export default function AuthGatewayScreen() {
             <div
               style={{
                 padding: '0.75rem 0.9rem',
-                background: 'rgba(56, 189, 248, 0.08)',
-                border: '1px solid rgba(56, 189, 248, 0.25)',
+                background: 'rgba(98,212,200,0.08)',
+                border: '1px solid rgba(98,212,200,0.25)',
                 borderRadius: '8px',
                 fontSize: '0.76rem',
-                color: '#bae6fd',
+                color: 'var(--text)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.5rem',
               }}
             >
-              <Sparkles size={16} color="#38bdf8" />
+              <Sparkles size={16} color="var(--accent)" />
               <span>
                 <strong>NASA Spaceflight Protocol:</strong> Space travelers are registered with an official
                 Astronaut Badge ID & PIN. No commercial email required.
@@ -422,7 +421,7 @@ export default function AuthGatewayScreen() {
                   minLength={6}
                 />
               </div>
-              <small style={{ fontSize: '0.68rem', color: '#94a3b8', marginTop: '0.25rem' }}>
+              <small style={{ fontSize: '0.68rem', color: 'var(--text-2)', marginTop: '0.25rem' }}>
                 Remember your Astronaut ID and PIN to log into any orbital station terminal.
               </small>
             </div>
@@ -524,7 +523,7 @@ export default function AuthGatewayScreen() {
           <span
             style={{
               fontSize: '0.72rem',
-              color: '#94a3b8',
+              color: 'var(--text-2)',
               fontFamily: 'var(--font-mono, monospace)',
               textTransform: 'uppercase',
               display: 'block',
@@ -541,7 +540,7 @@ export default function AuthGatewayScreen() {
               style={{ padding: '0.6rem 0.5rem' }}
             >
               <strong>Elena Vasquez</strong>
-              <small>MISSION COMMANDER</small>
+              <small>Mission commander</small>
             </button>
             <button
               type="button"
@@ -550,7 +549,7 @@ export default function AuthGatewayScreen() {
               style={{ padding: '0.6rem 0.5rem' }}
             >
               <strong>Dr. Marcus Chen</strong>
-              <small>FLIGHT SURGEON</small>
+              <small>Flight surgeon</small>
             </button>
           </div>
         </div>
@@ -561,7 +560,7 @@ export default function AuthGatewayScreen() {
         style={{
           marginTop: '1.75rem',
           fontSize: '0.72rem',
-          color: '#64748b',
+          color: 'var(--text-2)',
           fontFamily: 'var(--font-mono, monospace)',
           letterSpacing: '0.04em',
           textAlign: 'center',

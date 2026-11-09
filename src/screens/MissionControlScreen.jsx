@@ -174,13 +174,13 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
           <div className="mc-mission-id">
             <span className="mc-live-dot" />
             <div>
-              <span className="mc-eyebrow">EXPEDITION 07 · FLIGHT DECK</span>
-              <strong className="mc-callsign">ISS // LOW EARTH ORBIT</strong>
+              <span className="mc-eyebrow">Expedition 07 · flight deck</span>
+              <strong className="mc-callsign">ISS · Low Earth orbit</strong>
             </div>
           </div>
 
           <div className="mc-clock-display">
-            <span className="mc-clock-label">MISSION ELAPSED TIME</span>
+            <span className="mc-clock-label">Mission elapsed time</span>
             <span className="mc-clock-value">
               {String(met.days).padStart(3, '0')}D : {String(met.hours).padStart(2, '0')}H :{' '}
               {String(met.mins).padStart(2, '0')}M : {String(met.secs).padStart(2, '0')}S
@@ -189,19 +189,19 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
 
           <div className="mc-orbit-telemetry">
             <div className="mc-telem-item">
-              <small>ALTITUDE</small>
+              <small>Altitude</small>
               <b>{telemetry.altitude} <abbr>KM</abbr></b>
             </div>
             <div className="mc-telem-item">
-              <small>VELOCITY</small>
+              <small>Velocity</small>
               <b>{telemetry.velocity} <abbr>KM/S</abbr></b>
             </div>
             <div className="mc-telem-item">
-              <small>INCLINATION</small>
+              <small>Inclination</small>
               <b>51.6<abbr>°</abbr></b>
             </div>
             <div className="mc-telem-item">
-              <small>SUB-POINT</small>
+              <small>Sub-point</small>
               <b>{telemetry.subLat}° N / {telemetry.subLon}° E</b>
             </div>
           </div>
@@ -211,7 +211,7 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
         <div className="mc-hero-center">
           <div className="mc-hero-tag">
             <Orbit size={14} className="mc-spin" />
-            <span>ASTRONAUT HEALTH MONITORING & OPERATIONAL MEDICINE</span>
+            <span>Astronaut health monitoring & operational medicine</span>
           </div>
           <h1 className="mc-hero-title">
             Earth in view.<br />
@@ -224,23 +224,23 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
           <div className="mc-hero-actions">
             <button className="mc-btn-primary" onClick={() => setPage('health')}>
               <HeartPulse size={16} />
-              <span>OPEN CREW HEALTH MONITOR</span>
+              <span>Open crew health monitor</span>
               <ChevronRight size={15} />
             </button>
             <button className="mc-btn-secondary" onClick={() => setPage('crew')}>
               <Users size={15} />
-              <span>CREW ROSTER (04)</span>
+              <span>Crew roster (04)</span>
             </button>
             <button className="mc-btn-ghost" onClick={() => setPage('emergency')}>
               <LifeBuoy size={15} />
-              <span>EMERGENCY CONSOLE</span>
+              <span>Emergency console</span>
             </button>
           </div>
         </div>
 
         {/* Viewport Camera Mode Selector */}
         <div className="mc-view-switcher">
-          <span className="mc-view-label">CANOPY CAMERA</span>
+          <span className="mc-view-label">Canopy camera</span>
           <div className="mc-view-buttons">
             {[
               { id: 'ORBITAL', label: 'PANORAMA' },
@@ -256,13 +256,13 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
               </button>
             ))}
           </div>
-          <span className="mc-view-hint">DRAG TO ORBIT · SCROLL TO ZOOM</span>
+          <span className="mc-view-hint">Drag to orbit · scroll to zoom</span>
         </div>
 
         {/* Watermark Safety Guardrail */}
         <div className="mc-safety-ribbon">
           <ShieldCheck size={13} />
-          <span>SIMULATED MISSION ENVIRONMENT · NOT LIVE FLIGHT TELEMETRY</span>
+          <span>Simulated mission environment · not live flight telemetry</span>
         </div>
       </section>
 
@@ -274,11 +274,11 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
         <article className="mc-pod mc-pod-crew">
           <div className="mc-pod-header">
             <div>
-              <span className="mc-pod-eyebrow">CREW PHYSIOLOGICAL STATUS</span>
+              <span className="mc-pod-eyebrow">Crew physiological status</span>
               <h3>Flight Crew Readiness</h3>
             </div>
             <span className="mc-status-badge good">
-              <span className="mc-badge-dot" /> 03 / 04 NOMINAL
+              <span className="mc-badge-dot" /> 03 / 04 Nominal
             </span>
           </div>
 
@@ -312,7 +312,7 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
               <span>Commander Resting Pulse: <b>68 BPM</b> · Nominal baseline</span>
             </div>
             <button className="mc-link-btn" onClick={() => setPage('health')}>
-              INSPECT VITALS <ChevronRight size={13} />
+              Inspect vitals <ChevronRight size={13} />
             </button>
           </div>
         </article>
@@ -321,18 +321,18 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
         <article className="mc-pod mc-pod-medbay">
           <div className="mc-pod-header">
             <div>
-              <span className="mc-pod-eyebrow">MODULE 03 / CLINICAL LAB</span>
+              <span className="mc-pod-eyebrow">Module 03 / clinical lab</span>
               <h3>Medical Bay Logistics</h3>
             </div>
             <span className="mc-status-badge good">
-              <span className="mc-badge-dot" /> 98% READINESS
+              <span className="mc-badge-dot" /> 98% Readiness
             </span>
           </div>
 
           <div className="mc-readiness-meter">
             <div className="mc-meter-numbers">
               <strong>98.4<span>%</span></strong>
-              <small>CLINICAL SYSTEM AVAILABILITY</small>
+              <small>Clinical system availability</small>
             </div>
             <div className="mc-meter-track">
               <div className="mc-meter-fill" style={{ width: '98.4%' }} />
@@ -342,22 +342,22 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
           <div className="mc-med-inventory-snapshot">
             <div className="mc-inv-row">
               <span>Diagnostic Ultrasound (Butterfly iQ)</span>
-              <strong className="status-ready">READY · CALIBRATED</strong>
+              <strong className="status-ready">Ready · calibrated</strong>
             </div>
             <div className="mc-inv-row">
               <span>ECG & Continuous Vitals Sensors</span>
-              <strong className="status-ready">12 / 12 READY</strong>
+              <strong className="status-ready">12 / 12 Ready</strong>
             </div>
             <div className="mc-inv-row">
               <span>Emergency O₂ Resuscitation Kit</span>
-              <strong className="status-check">INSPECTION DUE IN 48H</strong>
+              <strong className="status-check">Inspection due in 48H</strong>
             </div>
           </div>
 
           <div className="mc-pod-footer">
             <span className="mc-footer-note">Sterile work surface pressurized at 101.3 kPa</span>
             <button className="mc-link-btn" onClick={() => setPage('medical')}>
-              OPEN MEDICAL BAY <ChevronRight size={13} />
+              Open medical bay <ChevronRight size={13} />
             </button>
           </div>
         </article>
@@ -366,11 +366,11 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
         <article className="mc-pod mc-pod-risk">
           <div className="mc-pod-header">
             <div>
-              <span className="mc-pod-eyebrow">ENVIRONMENTAL DOSIMETRY</span>
+              <span className="mc-pod-eyebrow">Environmental dosimetry</span>
               <h3>Space Risk Radar</h3>
             </div>
             <span className="mc-status-badge nominal">
-              <span className="mc-badge-dot" /> QUIESCENT
+              <span className="mc-badge-dot" /> Quiescent
             </span>
           </div>
 
@@ -389,17 +389,17 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
 
             <div className="mc-risk-telemetry">
               <div className="mc-env-metric">
-                <small>CABIN TEMPERATURE</small>
+                <small>Cabin temperature</small>
                 <strong>22.1 <abbr>°C</abbr></strong>
                 <span>Nominal thermal comfort</span>
               </div>
               <div className="mc-env-metric">
-                <small>CABIN PRESSURE</small>
+                <small>Cabin pressure</small>
                 <strong>101.3 <abbr>kPa</abbr></strong>
                 <span>Sea-level equivalent</span>
               </div>
               <div className="mc-env-metric">
-                <small>PARTIAL CO₂</small>
+                <small>Partial co₂</small>
                 <strong>0.42 <abbr>%</abbr></strong>
                 <span>Below headache ceiling</span>
               </div>
@@ -409,7 +409,7 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
           <div className="mc-pod-footer">
             <span className="mc-footer-note">Cumulative space radiation sample well below 30-day limits</span>
             <button className="mc-link-btn" onClick={() => setPage('health')}>
-              FULL RISK RADAR <ChevronRight size={13} />
+              Full risk radar <ChevronRight size={13} />
             </button>
           </div>
         </article>
@@ -423,10 +423,10 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
         <div className="mc-pod mc-log-pod">
           <div className="mc-pod-header">
             <div>
-              <span className="mc-pod-eyebrow">CHRONOLOGICAL AUDIT TRAIL</span>
+              <span className="mc-pod-eyebrow">Chronological audit trail</span>
               <h3>Recent Mission Health Notes</h3>
             </div>
-            <span className="mc-data-tag">SIMULATED LOGS</span>
+            <span className="mc-data-tag">Simulated logs</span>
           </div>
 
           <div className="mc-log-list">
@@ -472,10 +472,10 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
         <div className="mc-pod mc-dispatch-pod">
           <div className="mc-pod-header">
             <div>
-              <span className="mc-pod-eyebrow">FLIGHT DECK COMMAND</span>
+              <span className="mc-pod-eyebrow">Flight deck command</span>
               <h3>System Dispatch Matrix</h3>
             </div>
-            <span className="mc-data-tag">MISSION SYSTEMS</span>
+            <span className="mc-data-tag">Mission systems</span>
           </div>
 
           <div className="mc-dispatch-buttons">
@@ -544,11 +544,11 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
         <div className="mc-pod mc-comms-pod">
           <div className="mc-pod-header">
             <div>
-              <span className="mc-pod-eyebrow">DEEP-SPACE COMMUNICATIONS LINK</span>
+              <span className="mc-pod-eyebrow">Deep-space communications link</span>
               <h3>Speed-of-Light Delay Simulator</h3>
             </div>
             <span className="mc-status-badge cyan">
-              <Radio size={12} /> {distance.toUpperCase()} ({delay}S DELAY)
+              <Radio size={12} /> {distance} ({delay}s delay)
             </span>
           </div>
 
@@ -558,7 +558,7 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
 
           <div className="mc-comms-controls">
             <label className="mc-field">
-              <span>DISTANCE PROFILE</span>
+              <span>Distance profile</span>
               <select
                 value={distance}
                 onChange={e => {
@@ -573,7 +573,7 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
             </label>
 
             <label className="mc-field">
-              <span>ONE-WAY TRANSMISSION DELAY: <b>{delay} SECONDS</b></span>
+              <span>One-way transmission delay: <b>{delay} SECONDS</b></span>
               <input
                 type="range"
                 min="0"
@@ -594,12 +594,12 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
             />
             <button onClick={sendComms} disabled={!commsText.trim()} aria-label="Send message">
               <Send size={15} />
-              <span>TRANSMIT</span>
+              <span>Transmit</span>
             </button>
           </div>
 
           <div className="mc-comms-queue">
-            <span className="mc-queue-header">LINK TRANSMISSION QUEUE</span>
+            <span className="mc-queue-header">Link transmission queue</span>
             {commsMessages.length > 0 ? (
               commsMessages.map(m => (
                 <div key={m.id} className="mc-queue-item">
@@ -613,7 +613,7 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
                         </>
                       ) : (
                         <>
-                          <Check size={12} /> DELIVERED TO GROUND
+                          <Check size={12} /> Delivered to ground
                         </>
                       )}
                     </span>
@@ -634,11 +634,11 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
         <div className={`mc-pod mc-storm-pod ${storm ? 'storm-active' : ''}`}>
           <div className="mc-pod-header">
             <div>
-              <span className="mc-pod-eyebrow">CREW SAFETY CONTINGENCY</span>
+              <span className="mc-pod-eyebrow">Crew safety contingency</span>
               <h3>Solar Particle Event (SPE) Drill</h3>
             </div>
             <span className={`mc-status-badge ${storm ? 'emergency' : 'nominal'}`}>
-              <Zap size={12} /> {storm ? 'DRILL IN PROGRESS' : 'TRAINING STANDBY'}
+              <Zap size={12} /> {storm ? 'Drill in progress' : 'Training standby'}
             </span>
           </div>
 
@@ -646,7 +646,7 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
             <div className="mc-storm-banner" role="alert">
               <AlertTriangle size={18} />
               <div>
-                <strong>CORONAL MASS EJECTION DRILL ACTIVE</strong>
+                <strong>Coronal mass ejection drill active</strong>
                 <span>Radiation levels elevated. Implement shelter protocols and secure high-gain instrumentation.</span>
               </div>
             </div>
@@ -654,7 +654,7 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
 
           <div className="mc-storm-readout">
             <div className="mc-storm-numbers">
-              <small>SIMULATED EXPOSURE RATE</small>
+              <small>Simulated exposure rate</small>
               <strong>{(0.3 + stormElapsed * 0.18).toFixed(2)} <span>mSv</span></strong>
             </div>
             <div className="mc-storm-gauge">
@@ -666,7 +666,7 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
           </div>
 
           <div className="mc-storm-checklist">
-            <span className="mc-checklist-title">EMERGENCY PROTOCOL CHECKLIST</span>
+            <span className="mc-checklist-title">Emergency protocol checklist</span>
             {[
               ['Secure high-gain antenna & sensitive diagnostic kits', 'Stow portable ultrasound in shielded locker'],
               ['Order crew relocation to water-shielded habitat sleep station', 'Crew gathers in Module 02 radiation storm shelter'],
@@ -701,7 +701,7 @@ export default function MissionControlScreen({ setPage, crew = [] }) {
             }}
           >
             <Zap size={15} />
-            <span>{storm ? 'TERMINATE & RESET DRILL' : 'INITIATE SOLAR STORM TRAINING DRILL'}</span>
+            <span>{storm ? 'Terminate & reset drill' : 'Initiate solar storm training drill'}</span>
           </button>
         </div>
       </section>

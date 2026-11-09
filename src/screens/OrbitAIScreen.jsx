@@ -332,7 +332,7 @@ function ChatMessage({ msg, index }) {
       </div>
       <div className="oa-bubble-wrap">
         <div className="oa-bubble-meta">
-          <span>{isAI ? 'ORBIT AI · SCRIPTED' : 'YOU · COMMANDER'}</span>
+          <span>{isAI ? 'Orbit AI · scripted' : 'You · commander'}</span>
           {msg.at && (
             <time>
               {new Date(msg.at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -345,9 +345,9 @@ function ChatMessage({ msg, index }) {
         {isLong && (
           <button className="oa-expand-btn" onClick={() => setExpanded(v => !v)}>
             {expanded ? (
-              <><X size={9} /> COLLAPSE</>
+              <><X size={9} /> Collapse</>
             ) : (
-              <><ChevronRight size={9} /> READ MORE</>
+              <><ChevronRight size={9} /> Read more</>
             )}
           </button>
         )}
@@ -443,13 +443,13 @@ export default function OrbitAIScreen({ setPage, crew = [] }) {
         <div className="oa-header-left">
           <BrainCircuit size={18} color="var(--ai-cyan)" />
           <div>
-            <div className="oa-header-eyebrow">ORBIT HEALTH / AI ASSISTANT</div>
-            <div className="oa-header-title">ORBIT AI · SCRIPTED DEMO</div>
+            <div className="oa-header-eyebrow">Orbit Health / AI assistant</div>
+            <div className="oa-header-title">Orbit AI · scripted demo</div>
           </div>
           <div className="oa-header-divider" />
           <div className="oa-signal-badge">
             <span className={`oa-signal-dot ${thinking ? 'thinking' : ''}`} />
-            {thinking ? 'GENERATING RESPONSE' : 'STANDBY · NO REAL DATA'}
+            {thinking ? 'Generating response' : 'Standby · no real data'}
           </div>
         </div>
 
@@ -461,7 +461,7 @@ export default function OrbitAIScreen({ setPage, crew = [] }) {
             aria-label="Clear conversation"
           >
             <RotateCcw size={11} />
-            CLEAR SESSION
+            Clear session
           </button>
         </div>
       </header>
@@ -486,7 +486,7 @@ export default function OrbitAIScreen({ setPage, crew = [] }) {
 
           {/* Identity block */}
           <div className="oa-identity">
-            <div className="oa-identity-eyebrow">ONBOARD ASSISTANT / SIMULATION</div>
+            <div className="oa-identity-eyebrow">Onboard assistant / simulation</div>
             <div className="oa-identity-name">
               {thinking ? (
                 <>Processing<br /><em>sample data.</em></>
@@ -510,7 +510,7 @@ export default function OrbitAIScreen({ setPage, crew = [] }) {
                   flexShrink: 0,
                 }}
               />
-              {thinking ? 'THINKING · SCRIPTED DEMO' : 'READY · DEMO ONLY'}
+              {thinking ? 'Thinking · scripted demo' : 'Ready · demo only'}
             </div>
           </div>
 
@@ -534,7 +534,7 @@ export default function OrbitAIScreen({ setPage, crew = [] }) {
           <div className="oa-mission-context">
             <div className="oa-mc-head">
               <span>Mission Context</span>
-              <span>DEMO VALUES</span>
+              <span>Demo values</span>
             </div>
             <div className="oa-mc-grid">
               <div className="oa-mc-cell">
@@ -595,7 +595,7 @@ export default function OrbitAIScreen({ setPage, crew = [] }) {
               <Orbit size={15} color="var(--ai-cyan)" />
               <div>
                 <div className="oa-chat-status-label">
-                  <strong>ORBIT ASSISTANT</strong>
+                  <strong>Orbit Assistant</strong>
                 </div>
                 <div className="oa-chat-status-sub">
                   {thinking ? 'GENERATING SCRIPTED RESPONSE…' : 'OFFLINE PROTOTYPE · NO LIVE DATA'}
@@ -604,7 +604,7 @@ export default function OrbitAIScreen({ setPage, crew = [] }) {
             </div>
             <div className="oa-chat-encrypted">
               <ShieldCheck size={12} />
-              NO REAL MEDICAL DATA
+              No real medical data
             </div>
           </div>
 
@@ -622,7 +622,7 @@ export default function OrbitAIScreen({ setPage, crew = [] }) {
                 </div>
                 <div>
                   <div className="oa-bubble-meta">
-                    <span>ORBIT AI · DEMO RESPONSE</span>
+                    <span>Orbit AI · demo response</span>
                   </div>
                   <div className="oa-typing-bubble">
                     <span className="oa-typing-dot" />
@@ -677,7 +677,7 @@ export default function OrbitAIScreen({ setPage, crew = [] }) {
 
           {/* Safety disclaimer — REQUIRED, do not remove */}
           <div className="oa-disclaimer" role="note">
-            <strong>SCRIPTED DEMONSTRATION</strong>
+            <strong>Scripted demonstration</strong>
             {' · '}NOT MEDICAL ADVICE OR DIAGNOSIS
             {' · '}TRANSCRIPT STORED LOCALLY
             {' · '}THIS AI DOES NOT REPLACE A FLIGHT SURGEON
