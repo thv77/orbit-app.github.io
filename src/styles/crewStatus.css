@@ -1,0 +1,760 @@
+/* ==========================================================================
+   ORBIT HEALTH — CINEMATIC CREW STATUS STYLES
+   Futuristic Mission Personnel Command Centre Aesthetic
+   ========================================================================== */
+
+:root {
+  --cs-bg: #030712;
+  --cs-panel: rgba(8, 18, 33, 0.82);
+  --cs-panel-border: rgba(72, 215, 244, 0.18);
+  --cs-cyan: #48d7f4;
+  --cs-teal: #4ce3bd;
+  --cs-blue: #3b82f6;
+  --cs-amber: #f59e0b;
+  --cs-violet: #8b5cf6;
+  --cs-red: #ef4444;
+  --cs-text-main: #f0f6fc;
+  --cs-text-muted: #8b9bb4;
+  --cs-text-dim: #5a6e88;
+  --cs-mono: 'DM Mono', monospace;
+  --cs-sans: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.cs-root {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  color: var(--cs-text-main);
+  background: var(--cs-bg);
+  padding-bottom: 48px;
+}
+
+/* ==========================================================================
+   1. HEADER & OVERVIEW
+   ========================================================================== */
+.cs-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--cs-panel-border);
+}
+
+.cs-title-block {
+  max-width: 600px;
+}
+
+.cs-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 9px var(--cs-mono);
+  letter-spacing: 1.5px;
+  color: var(--cs-cyan);
+  margin-bottom: 6px;
+}
+
+.cs-icon-cyan { color: var(--cs-cyan); }
+.cs-icon-teal { color: var(--cs-teal); }
+.cs-icon-amber { color: var(--cs-amber); }
+
+.cs-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  margin: 0 0 6px;
+  color: #ffffff;
+}
+
+.cs-header p {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--cs-text-muted);
+  margin: 0;
+}
+
+.cs-header-stats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cs-stat-box {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 14px;
+  background: rgba(10, 22, 38, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+}
+
+.cs-stat-box small {
+  font: 8px var(--cs-mono);
+  letter-spacing: 1px;
+  color: var(--cs-text-dim);
+}
+
+.cs-stat-box strong {
+  font: 14px var(--cs-mono);
+  color: #ffffff;
+}
+
+.cs-stat-box strong span {
+  font-size: 9px;
+  color: var(--cs-cyan);
+  margin-left: 2px;
+}
+
+.cs-stat-box strong.good {
+  color: var(--cs-teal);
+}
+
+.cs-sim-tag {
+  font: 8px var(--cs-mono);
+  letter-spacing: 1px;
+  color: #f7d28c;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   2. ROLE-BASED PRIVACY ACCESS CONSOLE
+   ========================================================================== */
+.cs-privacy-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 20px;
+  background: rgba(8, 20, 36, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--cs-panel-border);
+  border-radius: 8px;
+  flex-wrap: wrap;
+}
+
+.cs-privacy-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  max-width: 680px;
+}
+
+.cs-privacy-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background: rgba(10, 26, 48, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.cs-privacy-title strong {
+  font: 12px var(--cs-mono);
+  letter-spacing: 0.8px;
+  color: #ffffff;
+}
+
+.cs-privacy-info p {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--cs-text-muted);
+  margin: 4px 0 0;
+}
+
+.cs-toggle-access-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font: 10px var(--cs-mono);
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cs-toggle-access-btn.auth {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid var(--cs-amber);
+  color: #fde68a;
+}
+
+.cs-toggle-access-btn.auth:hover {
+  background: rgba(245, 158, 11, 0.25);
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.3);
+}
+
+.cs-toggle-access-btn.restr {
+  background: rgba(76, 227, 189, 0.15);
+  border: 1px solid var(--cs-teal);
+  color: #6ee7b7;
+}
+
+.cs-toggle-access-btn.restr:hover {
+  background: rgba(76, 227, 189, 0.25);
+  box-shadow: 0 0 16px rgba(76, 227, 189, 0.3);
+}
+
+/* ==========================================================================
+   3. DOSSIER WORKSTATION LAYOUT
+   ========================================================================== */
+.cs-dossier-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.4fr);
+  gap: 20px;
+}
+
+/* Roster Sidebar */
+.cs-roster-sidebar {
+  background: var(--cs-panel);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--cs-panel-border);
+  border-radius: 8px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cs-sidebar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cs-filter-pills {
+  display: flex;
+  gap: 4px;
+}
+
+.cs-filter-pill {
+  padding: 3px 6px;
+  background: rgba(10, 22, 38, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  color: #8fa6bf;
+  font: 8px var(--cs-mono);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cs-filter-pill.active {
+  background: rgba(72, 215, 244, 0.2);
+  border-color: var(--cs-cyan);
+  color: #ffffff;
+}
+
+.cs-roster-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cs-roster-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: rgba(10, 22, 38, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cs-roster-card:hover {
+  background: rgba(18, 38, 64, 0.75);
+  border-color: rgba(72, 215, 244, 0.35);
+  transform: translateX(2px);
+}
+
+.cs-roster-card.active {
+  background: rgba(18, 42, 72, 0.9);
+  border-color: var(--cs-cyan);
+  box-shadow: 0 0 16px rgba(72, 215, 244, 0.25);
+}
+
+.cs-roster-card.monitor {
+  border-left: 3px solid var(--cs-amber);
+}
+
+.cs-roster-card.nominal {
+  border-left: 3px solid var(--cs-teal);
+}
+
+.cs-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font: 11px var(--cs-mono);
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.cs-avatar.violet { background: linear-gradient(135deg, #7c3aed, #4c1d95); }
+.cs-avatar.blue   { background: linear-gradient(135deg, #2563eb, #1e3a8a); }
+.cs-avatar.amber  { background: linear-gradient(135deg, #d97706, #78350f); }
+.cs-avatar.teal   { background: linear-gradient(135deg, #0d9488, #134e4a); }
+
+.cs-roster-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.cs-roster-meta strong {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.cs-roster-meta small {
+  font: 8px var(--cs-mono);
+  color: var(--cs-text-dim);
+}
+
+.cs-roster-indicators {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.cs-status-tag {
+  padding: 2px 6px;
+  border-radius: 3px;
+  font: 8px var(--cs-mono);
+  font-weight: 600;
+}
+
+.cs-status-tag.ok {
+  background: rgba(76, 227, 189, 0.15);
+  color: #6ee7b7;
+}
+
+.cs-status-tag.warn {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fbbf24;
+}
+
+.cs-roster-hr {
+  display: flex;
+  gap: 6px;
+  font: 9px var(--cs-mono);
+  color: var(--cs-text-muted);
+}
+
+.cs-roster-hr small {
+  font-size: 7px;
+  color: var(--cs-text-dim);
+}
+
+/* Dossier Detail Area */
+.cs-dossier-detail {
+  background: var(--cs-panel);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--cs-panel-border);
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+/* Detail Hero Header with 3D Space Helmet */
+.cs-detail-hero {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-wrap: wrap;
+}
+
+.cs-hero-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font: 18px var(--cs-mono);
+  font-weight: 800;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.cs-hero-badge.violet { background: linear-gradient(135deg, #7c3aed, #4c1d95); border: 1px solid #a78bfa; }
+.cs-hero-badge.blue   { background: linear-gradient(135deg, #2563eb, #1e3a8a); border: 1px solid #60a5fa; }
+.cs-hero-badge.amber  { background: linear-gradient(135deg, #d97706, #78350f); border: 1px solid #fcd34d; }
+.cs-hero-badge.teal   { background: linear-gradient(135deg, #0d9488, #134e4a); border: 1px solid #5eead4; }
+
+.cs-hero-info {
+  flex: 1;
+  min-width: 220px;
+}
+
+.cs-hero-callsign {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.cs-tag-callsign {
+  font: 9px var(--cs-mono);
+  letter-spacing: 1px;
+  color: var(--cs-cyan);
+  background: rgba(72, 215, 244, 0.12);
+  border: 1px solid rgba(72, 215, 244, 0.3);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.cs-status-pill {
+  font: 9px var(--cs-mono);
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.cs-status-pill.ok { background: rgba(76, 227, 189, 0.15); color: #6ee7b7; }
+.cs-status-pill.warn { background: rgba(245, 158, 11, 0.18); color: #fde68a; }
+
+.cs-hero-info h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: #ffffff;
+}
+
+.cs-hero-assignment {
+  font: 11px var(--cs-mono);
+  color: var(--cs-text-muted);
+}
+
+/* 3D Helmet Preview Box */
+.cs-helmet-preview {
+  position: relative;
+  width: 130px;
+  height: 120px;
+  background: radial-gradient(circle, #0e2238 0%, #06111f 75%);
+  border: 1px solid rgba(72, 215, 244, 0.25);
+  border-radius: 6px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.cs-helmet-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  cursor: grab;
+}
+
+.cs-helmet-canvas:active {
+  cursor: grabbing;
+}
+
+.cs-helmet-hint {
+  position: absolute;
+  bottom: 4px;
+  font: 6px var(--cs-mono);
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.5px;
+  pointer-events: none;
+}
+
+.cs-hero-action {
+  align-self: center;
+}
+
+.cs-btn-inspect-twin {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, #0e3d64, #08243c);
+  border: 1px solid var(--cs-cyan);
+  border-radius: 6px;
+  color: #ffffff;
+  font: 10px var(--cs-mono);
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 0 16px rgba(72, 215, 244, 0.2);
+}
+
+.cs-btn-inspect-twin:hover {
+  background: linear-gradient(135deg, #134f82, #0b3052);
+  box-shadow: 0 0 24px rgba(72, 215, 244, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Operational Metrics Bar */
+.cs-operational-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.cs-op-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 12px;
+  background: rgba(10, 22, 38, 0.6);
+  border-radius: 4px;
+  border-left: 2px solid rgba(72, 215, 244, 0.3);
+}
+
+.cs-op-item small {
+  font: 8px var(--cs-mono);
+  letter-spacing: 0.8px;
+  color: var(--cs-text-dim);
+}
+
+.cs-op-item strong {
+  font-size: 11px;
+  color: #ffffff;
+}
+
+.cs-op-item strong.teal {
+  color: var(--cs-teal);
+}
+
+/* Real-time Physiological Telemetry Row */
+.cs-vitals-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.cs-vital-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: rgba(10, 24, 44, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+}
+
+.cs-vital-item.cyan { border-left: 3px solid var(--cs-cyan); }
+.cs-vital-item.blue { border-left: 3px solid var(--cs-blue); }
+.cs-vital-item.teal { border-left: 3px solid var(--cs-teal); }
+
+.cs-vital-item small {
+  font: 8px var(--cs-mono);
+  color: var(--cs-text-dim);
+  display: block;
+}
+
+.cs-vital-item strong {
+  font: 18px var(--cs-sans);
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.cs-vital-item strong abbr {
+  font-size: 10px;
+  color: var(--cs-cyan);
+  text-decoration: none;
+}
+
+.cs-sub-metric {
+  margin-left: auto;
+  font: 8px var(--cs-mono);
+  color: var(--cs-text-muted);
+}
+
+/* Clinical Surveillance Notes */
+.cs-clinical-notes-card {
+  padding: 14px 16px;
+  background: rgba(8, 20, 36, 0.6);
+  border: 1px solid rgba(72, 215, 244, 0.15);
+  border-radius: 6px;
+}
+
+.cs-notes-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.cs-notes-header h3 {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0;
+  color: #ffffff;
+}
+
+.cs-notes-text {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #c0d3e8;
+  margin: 0;
+}
+
+/* Confidential Card & Redaction Mask */
+.cs-confidential-card {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  background: rgba(6, 14, 26, 0.75);
+  overflow: hidden;
+}
+
+.cs-confidential-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba(10, 24, 42, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cs-conf-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 9px var(--cs-mono);
+  letter-spacing: 0.8px;
+  color: #ffffff;
+}
+
+.cs-conf-tag {
+  font: 8px var(--cs-mono);
+  color: var(--cs-text-dim);
+}
+
+.cs-conf-body {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cs-conf-section small {
+  font: 8px var(--cs-mono);
+  letter-spacing: 0.8px;
+  color: var(--cs-cyan);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.cs-conf-section p {
+  font-size: 11px;
+  color: #b8cde2;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.cs-conf-section code {
+  display: block;
+  font: 11px var(--cs-mono);
+  background: rgba(3, 8, 16, 0.8);
+  padding: 8px 12px;
+  border-radius: 4px;
+  color: #8ce8fc;
+  border: 1px dashed rgba(72, 215, 244, 0.25);
+}
+
+/* Redaction Mask Overlay */
+.cs-redacted-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 28px 20px;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(14, 28, 48, 0.8),
+    rgba(14, 28, 48, 0.8) 12px,
+    rgba(8, 18, 32, 0.9) 12px,
+    rgba(8, 18, 32, 0.9) 24px
+  );
+}
+
+.cs-redacted-overlay strong {
+  font: 13px var(--cs-mono);
+  letter-spacing: 1px;
+  color: #f7d28c;
+  margin: 10px 0 6px;
+}
+
+.cs-redacted-overlay p {
+  font-size: 11px;
+  color: var(--cs-text-muted);
+  max-width: 440px;
+  margin: 0 0 14px;
+  line-height: 1.5;
+}
+
+.cs-btn-unlock {
+  padding: 8px 16px;
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid var(--cs-amber);
+  border-radius: 4px;
+  color: #fde68a;
+  font: 10px var(--cs-mono);
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cs-btn-unlock:hover {
+  background: rgba(245, 158, 11, 0.35);
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.4);
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 1100px) {
+  .cs-dossier-layout {
+    grid-template-columns: 1fr;
+  }
+  .cs-operational-metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .cs-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cs-detail-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cs-vitals-row {
+    grid-template-columns: 1fr;
+  }
+  .cs-operational-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+

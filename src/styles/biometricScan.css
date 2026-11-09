@@ -1,0 +1,794 @@
+/* ============================================================
+   ORBIT HEALTH – Biometric Scan Screen
+   src/styles/biometricScan.css
+   All classes prefixed `bs-`  |  Variables prefixed `--bs-`
+   ============================================================ */
+
+/* ── Design tokens ─────────────────────────────────────────── */
+:root {
+  --bs-bg:           #060d14;
+  --bs-panel:        #0a1623;
+  --bs-panel-alt:    #0d1d2e;
+  --bs-border:       rgba(0, 230, 255, 0.12);
+  --bs-border-mid:   rgba(0, 230, 255, 0.22);
+  --bs-cyan:         #00e5ff;
+  --bs-cyan-dim:     rgba(0, 229, 255, 0.55);
+  --bs-cyan-glow:    rgba(0, 229, 255, 0.18);
+  --bs-cyan-fade:    rgba(0, 229, 255, 0.07);
+  --bs-teal:         #00bcd4;
+  --bs-teal-dark:    #00838f;
+  --bs-amber:        #ffa726;
+  --bs-red:          #ef5350;
+  --bs-text:         #cce9f0;
+  --bs-muted:        rgba(180, 220, 235, 0.5);
+  --bs-mono:         'DM Mono', 'Courier New', monospace;
+  --bs-radius:       6px;
+  --bs-radius-lg:    10px;
+  --bs-transition:   0.3s ease;
+  --bs-stage-ratio:  70%;   /* padding-top trick for 10:7 aspect */
+  --bs-scan-dur:     3.2s;
+}
+
+/* ── Page shell ────────────────────────────────────────────── */
+.bs-page {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: 100%;
+  background: var(--bs-bg);
+  font-family: var(--bs-mono);
+  color: var(--bs-text);
+}
+
+/* ── Page header ───────────────────────────────────────────── */
+.bs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.5rem 1rem;
+  border-bottom: 1px solid var(--bs-border);
+  background: linear-gradient(180deg, rgba(0,229,255,0.04) 0%, transparent 100%);
+}
+
+.bs-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.bs-eyebrow {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bs-muted);
+  font-family: var(--bs-mono);
+}
+
+.bs-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.bs-title em {
+  color: var(--bs-cyan);
+  font-style: normal;
+}
+
+.bs-header-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.bs-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  padding: 0.3em 0.7em;
+  border-radius: var(--bs-radius);
+  border: 1px solid;
+  font-family: var(--bs-mono);
+  white-space: nowrap;
+}
+
+.bs-badge--warn {
+  color: var(--bs-amber);
+  border-color: rgba(255, 167, 38, 0.3);
+  background: rgba(255, 167, 38, 0.07);
+}
+
+.bs-badge--off {
+  color: var(--bs-red);
+  border-color: rgba(239, 83, 80, 0.3);
+  background: rgba(239, 83, 80, 0.07);
+}
+
+.bs-badge--demo {
+  color: var(--bs-muted);
+  border-color: var(--bs-border);
+  background: transparent;
+}
+
+/* ── Disconnected warning banner ───────────────────────────── */
+.bs-disconnected-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1.5rem;
+  background: rgba(239, 83, 80, 0.08);
+  border-bottom: 1px solid rgba(239, 83, 80, 0.2);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: #ef8f8d;
+  font-family: var(--bs-mono);
+}
+
+.bs-disconnected-bar svg {
+  flex-shrink: 0;
+  color: var(--bs-red);
+}
+
+.bs-disconnected-bar strong {
+  color: var(--bs-red);
+  margin-right: 0.3em;
+}
+
+/* ── Signal strength bars ──────────────────────────────────── */
+.bs-signal {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.bs-signal-bar {
+  width: 4px;
+  border-radius: 2px;
+  background: var(--bs-border-mid);
+}
+
+.bs-signal-bar:nth-child(1) { height: 6px; }
+.bs-signal-bar:nth-child(2) { height: 10px; }
+.bs-signal-bar:nth-child(3) { height: 14px; }
+.bs-signal-bar:nth-child(4) { height: 18px; }
+.bs-signal-bar:nth-child(5) { height: 22px; }
+
+/* Only bars 1-2 are "connected" (decorative – camera is off) */
+.bs-signal--disconnected .bs-signal-bar:nth-child(1) {
+  background: var(--bs-red);
+  animation: bs-signal-pulse 1.8s ease-in-out infinite;
+}
+
+.bs-signal--active .bs-signal-bar {
+  background: var(--bs-cyan-dim);
+}
+
+.bs-signal--active .bs-signal-bar:nth-child(1) {
+  animation: bs-signal-pulse 0.6s ease-in-out infinite alternate;
+}
+.bs-signal--active .bs-signal-bar:nth-child(2) {
+  animation: bs-signal-pulse 0.8s 0.1s ease-in-out infinite alternate;
+}
+.bs-signal--active .bs-signal-bar:nth-child(3) {
+  animation: bs-signal-pulse 0.7s 0.2s ease-in-out infinite alternate;
+}
+.bs-signal--active .bs-signal-bar:nth-child(4) {
+  animation: bs-signal-pulse 0.9s 0.1s ease-in-out infinite alternate;
+}
+.bs-signal--active .bs-signal-bar:nth-child(5) {
+  animation: bs-signal-pulse 0.65s 0.3s ease-in-out infinite alternate;
+}
+
+@keyframes bs-signal-pulse {
+  from { opacity: 0.3; }
+  to   { opacity: 1; }
+}
+
+/* ── Main two-column layout ────────────────────────────────── */
+.bs-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 0;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ── LEFT – Scan stage panel ───────────────────────────────── */
+.bs-stage-panel {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--bs-border);
+  background: var(--bs-panel);
+  overflow: hidden;
+  position: relative;
+}
+
+.bs-stage-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1.1rem;
+  border-bottom: 1px solid var(--bs-border);
+  gap: 1rem;
+}
+
+.bs-stage-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  color: var(--bs-muted);
+}
+
+.bs-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--bs-muted);
+  flex-shrink: 0;
+}
+
+.bs-status-dot--scanning {
+  background: var(--bs-cyan);
+  box-shadow: 0 0 8px var(--bs-cyan);
+  animation: bs-dot-pulse 0.7s ease-in-out infinite alternate;
+}
+
+.bs-status-dot--idle {
+  background: #3a5a6a;
+}
+
+@keyframes bs-dot-pulse {
+  from { opacity: 0.5; transform: scale(0.9); }
+  to   { opacity: 1;   transform: scale(1.2); }
+}
+
+/* view-mode tabs */
+.bs-view-tabs {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.bs-view-tab {
+  font-family: var(--bs-mono);
+  font-size: 0.57rem;
+  letter-spacing: 0.1em;
+  padding: 0.25em 0.6em;
+  border-radius: var(--bs-radius);
+  border: 1px solid var(--bs-border);
+  background: transparent;
+  color: var(--bs-muted);
+  cursor: pointer;
+  transition: var(--bs-transition);
+}
+
+.bs-view-tab:hover {
+  border-color: var(--bs-border-mid);
+  color: var(--bs-cyan-dim);
+}
+
+.bs-view-tab--active {
+  border-color: var(--bs-cyan-dim);
+  color: var(--bs-cyan);
+  background: var(--bs-cyan-fade);
+}
+
+/* ── WebGL canvas wrapper ──────────────────────────────────── */
+.bs-canvas-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 280px;
+  overflow: hidden;
+}
+
+.bs-canvas-wrap canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute;
+  inset: 0;
+}
+
+/* colour overlay per view mode */
+.bs-view-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  z-index: 1;
+}
+
+.bs-view-overlay--visible  { opacity: 0; }  /* no tint for visible light */
+.bs-view-overlay--thermal  { background: radial-gradient(ellipse at 50% 40%, rgba(255,80,30,0.14), transparent 70%); opacity: 1; }
+.bs-view-overlay--depth    { background: radial-gradient(ellipse at 50% 40%, rgba(0,100,255,0.12), transparent 70%); opacity: 1; }
+
+/* corner HUD decorations */
+.bs-hud-corner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  z-index: 2;
+}
+.bs-hud-corner::before,
+.bs-hud-corner::after {
+  content: '';
+  position: absolute;
+  background: var(--bs-cyan);
+  border-radius: 1px;
+}
+.bs-hud-corner--tl { top: 12px; left: 12px; }
+.bs-hud-corner--tl::before { width: 2px; height: 16px; top: 0; left: 0; }
+.bs-hud-corner--tl::after  { width: 16px; height: 2px; top: 0; left: 0; }
+
+.bs-hud-corner--tr { top: 12px; right: 12px; }
+.bs-hud-corner--tr::before { width: 2px; height: 16px; top: 0; right: 0; left: auto; }
+.bs-hud-corner--tr::after  { width: 16px; height: 2px; top: 0; right: 0; left: auto; }
+
+.bs-hud-corner--bl { bottom: 12px; left: 12px; }
+.bs-hud-corner--bl::before { width: 2px; height: 16px; bottom: 0; left: 0; top: auto; }
+.bs-hud-corner--bl::after  { width: 16px; height: 2px; bottom: 0; left: 0; top: auto; }
+
+.bs-hud-corner--br { bottom: 12px; right: 12px; }
+.bs-hud-corner--br::before { width: 2px; height: 16px; bottom: 0; right: 0; top: auto; left: auto; }
+.bs-hud-corner--br::after  { width: 16px; height: 2px; bottom: 0; right: 0; top: auto; left: auto; }
+
+/* view-mode label overlay */
+.bs-view-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: rgba(0, 229, 255, 0.35);
+  pointer-events: none;
+  z-index: 3;
+  text-align: center;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.bs-view-label--visible.bs-scanning { opacity: 1; }
+.bs-view-label--thermal.bs-scanning  { opacity: 1; color: rgba(255, 120, 60, 0.6); }
+.bs-view-label--depth.bs-scanning    { opacity: 1; color: rgba(80, 160, 255, 0.6); }
+
+/* stage bottom status row */
+.bs-stage-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1.1rem;
+  border-top: 1px solid var(--bs-border);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: var(--bs-muted);
+}
+
+.bs-stage-bottom-left,
+.bs-stage-bottom-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bs-cam-off {
+  color: var(--bs-red);
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+/* ── RIGHT – Details panel ─────────────────────────────────── */
+.bs-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--bs-border) transparent;
+  background: var(--bs-panel-alt);
+}
+
+.bs-details-section {
+  padding: 1.1rem 1.2rem;
+  border-bottom: 1px solid var(--bs-border);
+}
+
+.bs-details-section:last-child {
+  border-bottom: none;
+}
+
+/* intro heading */
+.bs-scan-heading {
+  margin: 0 0 0.3rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.25;
+}
+.bs-scan-heading em {
+  color: var(--bs-cyan);
+  font-style: normal;
+}
+
+.bs-scan-subtext {
+  font-size: 0.65rem;
+  color: var(--bs-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Scan steps ────────────────────────────────────────────── */
+.bs-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bs-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--bs-radius);
+  border: 1px solid var(--bs-border);
+  background: rgba(0, 0, 0, 0.2);
+  transition: border-color var(--bs-transition), background var(--bs-transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.bs-step--complete {
+  border-color: rgba(0, 229, 255, 0.3);
+  background: rgba(0, 229, 255, 0.05);
+}
+
+.bs-step--active {
+  border-color: var(--bs-cyan);
+  background: var(--bs-cyan-fade);
+  box-shadow: 0 0 18px rgba(0, 229, 255, 0.1);
+}
+
+/* animated left-edge highlight on active step */
+.bs-step--active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--bs-cyan);
+  box-shadow: 0 0 10px var(--bs-cyan);
+  animation: bs-step-flash 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes bs-step-flash {
+  from { opacity: 0.4; }
+  to   { opacity: 1; }
+}
+
+.bs-step-num {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--bs-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.58rem;
+  letter-spacing: 0.05em;
+  color: var(--bs-muted);
+  background: rgba(0,0,0,0.3);
+  transition: var(--bs-transition);
+}
+
+.bs-step--complete .bs-step-num {
+  border-color: var(--bs-cyan-dim);
+  color: var(--bs-cyan);
+  background: var(--bs-cyan-fade);
+}
+
+.bs-step--active .bs-step-num {
+  border-color: var(--bs-cyan);
+  color: var(--bs-cyan);
+  background: var(--bs-cyan-glow);
+  box-shadow: 0 0 10px var(--bs-cyan-glow);
+}
+
+.bs-step-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.bs-step-title {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--bs-muted);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.15rem;
+  text-transform: uppercase;
+  transition: color var(--bs-transition);
+}
+
+.bs-step--complete .bs-step-title,
+.bs-step--active   .bs-step-title {
+  color: var(--bs-cyan-dim);
+}
+
+.bs-step--active .bs-step-title {
+  color: var(--bs-cyan);
+}
+
+.bs-step-desc {
+  font-size: 0.6rem;
+  color: var(--bs-muted);
+  opacity: 0.7;
+}
+
+.bs-step-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  color: var(--bs-muted);
+}
+
+.bs-step--complete .bs-step-icon { color: var(--bs-cyan); }
+.bs-step--active   .bs-step-icon {
+  color: var(--bs-cyan);
+  animation: bs-dot-pulse 0.8s ease-in-out infinite alternate;
+}
+
+/* step progress bar (shows during active step) */
+.bs-step-progress-bar {
+  height: 1px;
+  background: var(--bs-border);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+.bs-step-progress-fill {
+  height: 100%;
+  background: var(--bs-cyan);
+  box-shadow: 0 0 6px var(--bs-cyan);
+  transform-origin: left;
+  animation: bs-step-fill linear forwards;
+}
+
+@keyframes bs-step-fill {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ── Scan button ───────────────────────────────────────────── */
+.bs-scan-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1rem;
+  font-family: var(--bs-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+  border: 1px solid var(--bs-cyan-dim);
+  border-radius: var(--bs-radius);
+  background: linear-gradient(135deg, rgba(0,229,255,0.1) 0%, rgba(0,188,212,0.07) 100%);
+  color: var(--bs-cyan);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.bs-scan-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--bs-cyan-glow);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.bs-scan-btn:hover::before { opacity: 1; }
+
+.bs-scan-btn:hover {
+  border-color: var(--bs-cyan);
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.2);
+}
+
+.bs-scan-btn--scanning {
+  border-color: rgba(239, 83, 80, 0.5);
+  color: #ef8f8d;
+  background: linear-gradient(135deg, rgba(239,83,80,0.08) 0%, rgba(239,83,80,0.04) 100%);
+  animation: bs-btn-scanning-glow 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes bs-btn-scanning-glow {
+  from { box-shadow: 0 0 10px rgba(239, 83, 80, 0.1); }
+  to   { box-shadow: 0 0 24px rgba(239, 83, 80, 0.3); }
+}
+
+/* ── Medical warning box ───────────────────────────────────── */
+.bs-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--bs-radius);
+  border: 1px solid rgba(255, 167, 38, 0.25);
+  background: rgba(255, 167, 38, 0.06);
+  font-size: 0.6rem;
+  line-height: 1.6;
+  color: rgba(255, 180, 60, 0.9);
+  font-family: var(--bs-mono);
+  letter-spacing: 0.04em;
+}
+
+.bs-warning svg {
+  flex-shrink: 0;
+  margin-top: 0.1em;
+  color: var(--bs-amber);
+}
+
+/* ── Baseline comparison ───────────────────────────────────── */
+.bs-baseline-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+}
+
+.bs-text-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  font-family: var(--bs-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--bs-cyan-dim);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--bs-transition);
+}
+.bs-text-btn:hover { color: var(--bs-cyan); }
+
+.bs-baseline-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.65rem;
+  animation: bs-fade-in 0.3s ease;
+}
+
+@keyframes bs-fade-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.bs-baseline-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.62rem;
+  color: var(--bs-muted);
+  letter-spacing: 0.06em;
+}
+
+.bs-baseline-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.bs-baseline-dot--ok   { background: #26c6da; }
+.bs-baseline-dot--diff { background: var(--bs-amber); }
+.bs-baseline-dot--nc   { background: #546e7a; }
+
+.bs-baseline-note {
+  font-size: 0.57rem;
+  color: rgba(140, 190, 210, 0.45);
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  font-style: italic;
+}
+
+/* ── Scan history ──────────────────────────────────────────── */
+.bs-history-eyebrow {
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  color: var(--bs-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.65rem;
+  display: block;
+}
+
+.bs-history-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.bs-history-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--bs-radius);
+  border: 1px solid var(--bs-border);
+  background: rgba(0,0,0,0.15);
+  animation: bs-fade-in 0.4s ease;
+}
+
+.bs-history-time {
+  font-size: 0.62rem;
+  color: var(--bs-cyan-dim);
+  letter-spacing: 0.06em;
+}
+
+.bs-history-result {
+  font-size: 0.6rem;
+  color: var(--bs-muted);
+  letter-spacing: 0.04em;
+  opacity: 0.75;
+}
+
+/* ── Responsive: stack on small screens ────────────────────── */
+@media (max-width: 860px) {
+  .bs-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .bs-stage-panel {
+    border-right: none;
+    border-bottom: 1px solid var(--bs-border);
+  }
+
+  .bs-canvas-wrap {
+    min-height: 220px;
+  }
+
+  .bs-details {
+    max-height: none;
+  }
+
+  .bs-header {
+    flex-wrap: wrap;
+    padding: 0.9rem 1rem;
+  }
+
+  .bs-stage-topbar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .bs-view-tabs {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 540px) {
+  .bs-title { font-size: 1rem; }
+  .bs-header-badges { gap: 0.4rem; }
+  .bs-badge { font-size: 0.55rem; padding: 0.2em 0.5em; }
+}

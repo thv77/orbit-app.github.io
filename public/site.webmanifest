@@ -1,0 +1,16 @@
+{
+  "name": "ORBIT HEALTH",
+  "short_name": "ORBIT HEALTH",
+  "description": "Astronaut health monitoring concept interface - NASA Space Apps Challenge",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050914",
+  "theme_color": "#050914",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

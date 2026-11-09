@@ -1,0 +1,821 @@
+/**
+ * ORBIT HEALTH — Aerospace Authentication & Registration Modals
+ * NASA Space Apps Challenge Astronaut Health & Operations Platform
+ *
+ * Implements:
+ * - Commercial aerospace login modal with Supabase Auth integration.
+ * - Astronaut self-registration with callsign request and quarantine warnings.
+ * - Quarantined pending approval screen for applicants awaiting administrator triage.
+ * - Account inspection and demo persona switcher for offline evaluation.
+ */
+
+import React, { useState } from 'react'
+import {
+  AlertTriangle,
+  ArrowRight,
+  CheckCircle2,
+  FileText,
+  Key,
+  Lock,
+  LogIn,
+  LogOut,
+  Mail,
+  Orbit,
+  RefreshCw,
+  Shield,
+  ShieldAlert,
+  ShieldCheck,
+  User,
+  UserPlus,
+  Users,
+  X,
+  Zap,
+} from 'lucide-react'
+import { useAuth } from '../../context/AuthContext'
+import '../../styles/authModals.css'
+
+export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
+  const {
+    user,
+    profile,
+    crewMember,
+    roles,
+    registrationRequest,
+    isDemoMode,
+    isAdmin,
+    isFlightSurgeon,
+    isAstronaut,
+    isAuthorized,
+    registrationState,
+    isPendingApproval,
+    isEmailUnconfirmed,
+    login,
+    logout,
+    registerAstronaut,
+    switchDemoAccount,
+    refreshSession,
+    isLoading,
+    error: authError,
+  } = useAuth()
+
+  const [view, setView] = useState(initialView) // 'LOGIN' | 'REGISTER' | 'ACCOUNT'
+  const [identifier, setIdentifier] = useState('')
+  const [pin, setPin] = useState('')
+  const [localError, setLocalError] = useState(null)
+  const [successNotice, setSuccessNotice] = useState(null)
+
+  // Registration Form State
+  const [fullName, setFullName] = useState('')
+  const [astronautId, setAstronautId] = useState(() => `NASA-${Math.floor(100 + Math.random() * 899)}`)
+  const [callsign, setCallsign] = useState('')
+  const [agency, setAgency] = useState('NASA')
+  const [requestedRole, setRequestedRole] = useState('MISSION SPECIALIST')
+  const [statement, setStatement] = useState('')
+
+  if (!isOpen) return null
+
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault()
+    setLocalError(null)
+    setSuccessNotice(null)
+
+    if (!identifier || !pin) {
+      setLocalError('Please enter Astronaut ID / Badge Number and Flight PIN.')
+      return
+    }
+
+    const res = await login(identifier, pin)
+    if (!res.success) {
+      setLocalError(res.error || 'Authentication failed. Please verify credentials.')
+    } else {
+      if (res.simulated) {
+        setSuccessNotice('Demo session initiated. Local prototype mode active.')
+      }
+      setTimeout(() => {
+        onClose()
+      }, 700)
+    }
+  }
+
+  const handleRegisterSubmit = async (e) => {
+    e.preventDefault()
+    setLocalError(null)
+    setSuccessNotice(null)
+
+    if (!astronautId || !pin || !fullName) {
+      setLocalError('Please fill in Astronaut Badge ID, Full Name, and Flight PIN.')
+      return
+    }
+
+    const res = await registerAstronaut({
+      astronautId: astronautId.trim(),
+      pin: pin.trim(),
+      fullName: fullName.trim(),
+      requestedCallsign: callsign.trim() || astronautId.trim(),
+      requestedRole,
+      agency,
+      statementOfIntent: statement,
+    })
+
+    if (!res.success) {
+      setLocalError(res.error || 'Application submission failed.')
+    } else {
+      setSuccessNotice(res.message)
+      setTimeout(() => {
+        setView('ACCOUNT')
+      }, 900)
+    }
+  }
+
+  const handleQuickSelect = (accountKey) => {
+    switchDemoAccount(accountKey)
+    setSuccessNotice(`Switched to demo persona: ${accountKey.toUpperCase()}`)
+    setTimeout(() => {
+      onClose()
+    }, 600)
+  }
+
+  return (
+    <div className="auth-modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
+      <div className="auth-dialog" onClick={(e) => e.stopPropagation()}>
+        {/* Modal Header */}
+        <div className="auth-header">
+          <div className="auth-brand">
+            <div className="auth-brand-icon">
+              <Orbit size={20} />
+            </div>
+            <div className="auth-brand-text">
+              <h2>ORBIT HEALTH</h2>
+              <span>
+                {view === 'LOGIN' && 'Personnel Authentication'}
+                {view === 'REGISTER' && 'Astronaut Enlistment'}
+                {view === 'ACCOUNT' && 'Operational Clearance Profile'}
+              </span>
+            </div>
+          </div>
+          <button className="auth-close-btn" onClick={onClose} aria-label="Close modal">
+            <X size={18} />
+          </button>
+        </div>
+
+        {/* Modal Body */}
+        <div className="auth-body">
+          {/* Mode Pill Indicator */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span className={`auth-mode-pill ${isDemoMode ? 'demo' : 'live'}`}>
+              <Shield size={13} />
+              {isDemoMode ? 'PROTOTYPE DEMO MODE' : 'LIVE SUPABASE AUTH'}
+            </span>
+            {user && (
+              <span style={{ fontSize: '0.72rem', color: '#9ca3af', fontFamily: 'monospace' }}>
+                SESSION: {user.email}
+              </span>
+            )}
+          </div>
+
+          {/* Prominent Auth Mode Tabs: Sign In vs Enlist as Astronaut */}
+          {!user && (
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '0.4rem',
+                background: 'rgba(255, 255, 255, 0.04)',
+                padding: '0.3rem',
+                borderRadius: '8px',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+              }}
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  setView('LOGIN')
+                  setLocalError(null)
+                }}
+                style={{
+                  padding: '0.65rem 0.75rem',
+                  borderRadius: '6px',
+                  border: 'none',
+                  background: view === 'LOGIN' ? 'linear-gradient(135deg, rgba(2, 132, 199, 0.3) 0%, rgba(56, 189, 248, 0.25) 100%)' : 'transparent',
+                  color: view === 'LOGIN' ? '#38bdf8' : '#94a3b8',
+                  fontWeight: view === 'LOGIN' ? 700 : 500,
+                  fontSize: '0.82rem',
+                  letterSpacing: '0.04em',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                  borderBottom: view === 'LOGIN' ? '2px solid #38bdf8' : '2px solid transparent',
+                  fontFamily: 'var(--font-mono, monospace)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.4rem',
+                }}
+              >
+                <LogIn size={15} />
+                SIGN IN
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setView('REGISTER')
+                  setLocalError(null)
+                }}
+                style={{
+                  padding: '0.65rem 0.75rem',
+                  borderRadius: '6px',
+                  border: 'none',
+                  background: view === 'REGISTER' ? 'linear-gradient(135deg, rgba(2, 132, 199, 0.3) 0%, rgba(56, 189, 248, 0.25) 100%)' : 'transparent',
+                  color: view === 'REGISTER' ? '#38bdf8' : '#94a3b8',
+                  fontWeight: view === 'REGISTER' ? 700 : 500,
+                  fontSize: '0.82rem',
+                  letterSpacing: '0.04em',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                  borderBottom: view === 'REGISTER' ? '2px solid #38bdf8' : '2px solid transparent',
+                  fontFamily: 'var(--font-mono, monospace)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.4rem',
+                }}
+              >
+                <UserPlus size={15} />
+                ENLIST AS ASTRONAUT
+              </button>
+            </div>
+          )}
+
+          {/* Error & Success Banners */}
+          {(localError || authError) && (
+            <div className="auth-error-banner">
+              <AlertTriangle size={16} />
+              <span>{localError || authError}</span>
+            </div>
+          )}
+
+          {successNotice && (
+            <div
+              style={{
+                padding: '0.75rem 1rem',
+                background: 'rgba(16, 185, 129, 0.12)',
+                border: '1px solid rgba(16, 185, 129, 0.35)',
+                borderRadius: '8px',
+                color: '#34d399',
+                fontSize: '0.82rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+              }}
+            >
+              <CheckCircle2 size={16} />
+              <span>{successNotice}</span>
+            </div>
+          )}
+
+          {/* VIEW: EMAIL VERIFICATION REQUIRED */}
+          {user && isEmailUnconfirmed ? (
+            <div className="pending-quarantine-box" style={{ borderColor: 'rgba(56, 189, 248, 0.4)' }}>
+              <div className="quarantine-icon-ring" style={{ background: 'rgba(56, 189, 248, 0.15)', borderColor: '#38bdf8' }}>
+                <Mail size={30} color="#38bdf8" />
+              </div>
+              <div>
+                <h3 style={{ margin: '0 0 0.35rem', color: '#38bdf8', fontSize: '1.05rem' }}>
+                  Verification Email Dispatched
+                </h3>
+                <p style={{ margin: 0, fontSize: '0.82rem', color: '#d1d5db', lineHeight: 1.4 }}>
+                  Your astronaut account has been provisioned. To unlock telemetry operations, please click the confirmation link sent to:
+                </p>
+                <div style={{ marginTop: '0.5rem', fontFamily: 'monospace', color: '#38bdf8', fontSize: '0.85rem' }}>
+                  {user.email}
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', width: '100%', marginTop: '0.5rem' }}>
+                <button
+                  type="button"
+                  className="auth-btn-primary"
+                  style={{ background: 'rgba(56, 189, 248, 0.2)', borderColor: 'rgba(56, 189, 248, 0.4)' }}
+                  onClick={() => window.location.reload()}
+                >
+                  <RefreshCw size={16} /> I Have Confirmed My Email
+                </button>
+                <button
+                  type="button"
+                  className="auth-btn-primary"
+                  style={{ background: 'rgba(239, 68, 68, 0.15)', borderColor: 'rgba(239, 68, 68, 0.35)' }}
+                  onClick={() => logout()}
+                >
+                  <LogOut size={16} /> Sign Out
+                </button>
+              </div>
+            </div>
+          ) : user && isPendingApproval ? (
+            <div className="pending-quarantine-box">
+              <div className="quarantine-icon-ring">
+                <ShieldAlert size={30} />
+              </div>
+              <div>
+                <h3 style={{ margin: '0 0 0.35rem', color: '#f59e0b', fontSize: '1.05rem' }}>
+                  Application Quarantined
+                </h3>
+                <p style={{ margin: 0, fontSize: '0.82rem', color: '#d1d5db', lineHeight: 1.4 }}>
+                  Your astronaut self-registration has been submitted and is currently awaiting
+                  administrative triage by Flight Operations.
+                </p>
+              </div>
+
+              <div className="quarantine-details">
+                <div>
+                  <strong>CALLSIGN REQUESTED:</strong>{' '}
+                  <span style={{ color: '#38bdf8' }}>
+                    {registrationRequest?.requestedCallsign || registrationRequest?.requested_callsign || 'PENDING'}
+                  </span>
+                </div>
+                <div>
+                  <strong>OPERATIONAL ROLE:</strong>{' '}
+                  <span>
+                    {registrationRequest?.requestedRole || registrationRequest?.requested_role || 'ASTRONAUT CANDIDATE'}
+                  </span>
+                </div>
+                <div>
+                  <strong>STATUS:</strong>{' '}
+                  <span style={{ color: '#fbbf24', fontWeight: 600 }}>PENDING_APPROVAL</span>
+                </div>
+                <div>
+                  <strong>CLEARANCE RESTRICTION:</strong>{' '}
+                  <span style={{ color: '#ef4444' }}>AIR-GAPPED (NO TELEMETRY ACCESS)</span>
+                </div>
+              </div>
+
+              {isDemoMode && (
+                <div
+                  style={{
+                    fontSize: '0.74rem',
+                    color: '#9ca3af',
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    padding: '0.6rem 0.8rem',
+                    borderRadius: '6px',
+                    width: '100%',
+                  }}
+                >
+                  <strong style={{ color: '#fbbf24' }}>DEMO SIMULATION:</strong> Use the demo selector below to switch
+                  to an Administrator persona to review and approve registrations.
+                </div>
+              )}
+
+              {/* Demo Quick Persona Switcher in Quarantine */}
+              {isDemoMode && (
+                <div className="auth-quick-switch" style={{ width: '100%' }}>
+                  <span className="auth-quick-title">Test Other Personas</span>
+                  <div className="auth-quick-grid">
+                    <button
+                      type="button"
+                      className="auth-quick-pill"
+                      onClick={() => handleQuickSelect('admin')}
+                    >
+                      <strong>Flight Director</strong>
+                      <small>ADMINISTRATOR</small>
+                    </button>
+                    <button
+                      type="button"
+                      className="auth-quick-pill"
+                      onClick={() => handleQuickSelect('commander')}
+                    >
+                      <strong>Elena Vasquez</strong>
+                      <small>COMMANDER</small>
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              <button
+                className="auth-btn-primary"
+                style={{ background: 'rgba(239, 68, 68, 0.2)', borderColor: 'rgba(239, 68, 68, 0.4)' }}
+                onClick={() => logout()}
+              >
+                <LogOut size={16} /> Sign Out of Candidate Account
+              </button>
+            </div>
+          ) : user && registrationState === 'provisioning' ? (
+            <div className="pending-quarantine-box" style={{ borderColor: 'rgba(245, 158, 11, 0.4)' }}>
+              <div className="quarantine-icon-ring" style={{ background: 'rgba(245, 158, 11, 0.15)', borderColor: '#f59e0b' }}>
+                <RefreshCw size={30} color="#f59e0b" />
+              </div>
+              <div>
+                <h3 style={{ margin: '0 0 0.35rem', color: '#f59e0b', fontSize: '1.05rem' }}>
+                  Personnel Dossier Provisioning
+                </h3>
+                <p style={{ margin: 0, fontSize: '0.82rem', color: '#d1d5db', lineHeight: 1.4 }}>
+                  Your account is verified. Database triggers are generating your flight dossier, callsign assignment,
+                  and baseline telemetry channels.
+                </p>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', width: '100%', marginTop: '0.5rem' }}>
+                <button
+                  type="button"
+                  className="auth-btn-primary"
+                  style={{ background: 'rgba(245, 158, 11, 0.2)', borderColor: 'rgba(245, 158, 11, 0.4)', color: '#fbbf24' }}
+                  onClick={async () => {
+                    const res = await refreshSession()
+                    if (res?.registrationState === 'active') {
+                      setSuccessNotice('Personnel dossier provisioned and active!')
+                    }
+                  }}
+                >
+                  <RefreshCw size={16} /> Check Clearance Status
+                </button>
+                <button
+                  type="button"
+                  className="auth-btn-primary"
+                  style={{ background: 'rgba(239, 68, 68, 0.15)', borderColor: 'rgba(239, 68, 68, 0.35)' }}
+                  onClick={() => logout()}
+                >
+                  <LogOut size={16} /> Sign Out
+                </button>
+              </div>
+            </div>
+          ) : user && registrationState === 'provisioning_error' ? (
+            <div className="pending-quarantine-box" style={{ borderColor: 'rgba(239, 68, 68, 0.4)' }}>
+              <div className="quarantine-icon-ring" style={{ background: 'rgba(239, 68, 68, 0.15)', borderColor: '#ef4444' }}>
+                <AlertTriangle size={30} color="#ef4444" />
+              </div>
+              <div>
+                <h3 style={{ margin: '0 0 0.35rem', color: '#ef4444', fontSize: '1.05rem' }}>
+                  Authorization Check Failed
+                </h3>
+                <p style={{ margin: 0, fontSize: '0.82rem', color: '#d1d5db', lineHeight: 1.4 }}>
+                  Unable to establish authoritative clearance credentials with the flight operations server.
+                </p>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', width: '100%', marginTop: '0.5rem' }}>
+                <button
+                  type="button"
+                  className="auth-btn-primary"
+                  style={{ background: 'rgba(56, 189, 248, 0.2)', borderColor: 'rgba(56, 189, 248, 0.4)' }}
+                  onClick={() => refreshSession()}
+                >
+                  <RefreshCw size={16} /> Retry Clearance Verification
+                </button>
+                <button
+                  type="button"
+                  className="auth-btn-primary"
+                  style={{ background: 'rgba(239, 68, 68, 0.15)', borderColor: 'rgba(239, 68, 68, 0.35)' }}
+                  onClick={() => logout()}
+                >
+                  <LogOut size={16} /> Sign Out
+                </button>
+              </div>
+            </div>
+          ) : view === 'ACCOUNT' && user ? (
+            /* VIEW: ACTIVE ACCOUNT PROFILE INSPECTOR */
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div
+                style={{
+                  padding: '1.25rem',
+                  background: 'rgba(255, 255, 255, 0.03)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  borderRadius: '10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '1rem',
+                }}
+              >
+                <div
+                  style={{
+                    width: '48px',
+                    height: '48px',
+                    borderRadius: '50%',
+                    background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontFamily: 'monospace',
+                    fontWeight: 700,
+                    fontSize: '1.1rem',
+                    color: '#ffffff',
+                  }}
+                >
+                  {crewMember?.initials || profile?.full_name?.slice(0, 2).toUpperCase() || 'OH'}
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <strong style={{ fontSize: '1rem', color: '#ffffff' }}>
+                    {crewMember?.fullName || profile?.full_name || user.email}
+                  </strong>
+                  <span style={{ fontSize: '0.78rem', color: '#38bdf8', fontFamily: 'monospace' }}>
+                    {crewMember?.callsign ? `CALLSIGN: ${crewMember.callsign}` : user.email}
+                  </span>
+                  <div style={{ display: 'flex', gap: '0.35rem', marginTop: '0.35rem' }}>
+                    {roles.length > 0 ? (
+                      roles.map((r) => (
+                        <span key={r} className={`topbar-auth-role ${r}`}>
+                          {r.toUpperCase()}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="topbar-auth-role pending">NO ROLES ASSIGNED</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Demo Mode Persona Switcher */}
+              {isDemoMode && (
+                <div className="auth-quick-switch">
+                  <span className="auth-quick-title">Switch Simulated Persona</span>
+                  <div className="auth-quick-grid">
+                    <button
+                      type="button"
+                      className={`auth-quick-pill ${crewMember?.callsign === 'VANGUARD-1' ? 'active' : ''}`}
+                      onClick={() => handleQuickSelect('commander')}
+                    >
+                      <strong>Elena Vasquez</strong>
+                      <small>COMMANDER (ASTRONAUT)</small>
+                    </button>
+                    <button
+                      type="button"
+                      className={`auth-quick-pill ${crewMember?.callsign === 'SURGEON-1' ? 'active' : ''}`}
+                      onClick={() => handleQuickSelect('surgeon')}
+                    >
+                      <strong>Dr. Marcus Chen</strong>
+                      <small>FLIGHT SURGEON</small>
+                    </button>
+                    <button
+                      type="button"
+                      className={`auth-quick-pill ${isAdmin ? 'active' : ''}`}
+                      onClick={() => handleQuickSelect('admin')}
+                    >
+                      <strong>Gene Kranz</strong>
+                      <small>ADMINISTRATOR</small>
+                    </button>
+                    <button
+                      type="button"
+                      className="auth-quick-pill"
+                      onClick={() => handleQuickSelect('pending')}
+                    >
+                      <strong>Astra Cadet</strong>
+                      <small>PENDING APPROVAL</small>
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
+                <button
+                  type="button"
+                  className="auth-btn-primary"
+                  style={{
+                    background: 'rgba(239, 68, 68, 0.15)',
+                    borderColor: 'rgba(239, 68, 68, 0.35)',
+                    color: '#fca5a5',
+                  }}
+                  onClick={() => logout()}
+                >
+                  <LogOut size={16} /> Sign Out
+                </button>
+                <button type="button" className="auth-btn-primary" onClick={onClose}>
+                  Done
+                </button>
+              </div>
+            </div>
+          ) : view === 'LOGIN' ? (
+            /* VIEW: PERSONNEL LOGIN */
+            <form onSubmit={handleLoginSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div className="auth-form-group">
+                <label>Astronaut ID / Badge Number (or Email)</label>
+                <div className="auth-input-wrapper">
+                  <ShieldCheck size={16} />
+                  <input
+                    type="text"
+                    className="auth-input"
+                    placeholder="e.g. NASA-621 or ASTRO-084"
+                    value={identifier}
+                    onChange={(e) => setIdentifier(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="auth-form-group">
+                <label>Flight Security Access PIN</label>
+                <div className="auth-input-wrapper">
+                  <Key size={16} />
+                  <input
+                    type="password"
+                    className="auth-input"
+                    placeholder="Enter flight PIN"
+                    value={pin}
+                    onChange={(e) => setPin(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+
+              <button type="submit" className="auth-btn-primary" disabled={isLoading}>
+                {isLoading ? <RefreshCw size={16} className="animate-spin" /> : <ShieldCheck size={16} />}
+                Authenticate Clearance
+              </button>
+
+              {/* Demo Mode Persona Switcher */}
+              {isDemoMode && (
+                <div className="auth-quick-switch">
+                  <span className="auth-quick-title">Instant Prototype Personas (Offline)</span>
+                  <div className="auth-quick-grid">
+                    <button
+                      type="button"
+                      className="auth-quick-pill"
+                      onClick={() => handleQuickSelect('commander')}
+                    >
+                      <strong>Elena Vasquez</strong>
+                      <small>COMMANDER · ASTRONAUT</small>
+                    </button>
+                    <button
+                      type="button"
+                      className="auth-quick-pill"
+                      onClick={() => handleQuickSelect('surgeon')}
+                    >
+                      <strong>Dr. Marcus Chen</strong>
+                      <small>FLIGHT SURGEON</small>
+                    </button>
+                    <button
+                      type="button"
+                      className="auth-quick-pill"
+                      onClick={() => handleQuickSelect('admin')}
+                    >
+                      <strong>Flight Operations</strong>
+                      <small>ADMINISTRATOR</small>
+                    </button>
+                    <button
+                      type="button"
+                      className="auth-quick-pill"
+                      onClick={() => handleQuickSelect('pending')}
+                    >
+                      <strong>Cadet Applicant</strong>
+                      <small>PENDING APPROVAL</small>
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              <div className="auth-switch-links">
+                <span>New astronaut applicant?</span>
+                <button
+                  type="button"
+                  className="auth-text-btn"
+                  onClick={() => {
+                    setView('REGISTER')
+                    setLocalError(null)
+                  }}
+                >
+                  Submit Registration Request
+                </button>
+              </div>
+            </form>
+          ) : (
+            /* VIEW: ASTRONAUT SELF-REGISTRATION */
+            <form onSubmit={handleRegisterSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div
+                style={{
+                  padding: '0.75rem 0.9rem',
+                  background: 'rgba(56, 189, 248, 0.08)',
+                  border: '1px solid rgba(56, 189, 248, 0.25)',
+                  borderRadius: '8px',
+                  fontSize: '0.78rem',
+                  color: '#bae6fd',
+                  lineHeight: 1.45,
+                }}
+              >
+                <strong style={{ color: '#38bdf8' }}>NASA Spaceflight Protocol:</strong> Space travelers
+                are assigned an official Astronaut Badge ID & Security PIN. Open enlistment automatically provisions
+                your flight dossier and telemetry channels without requiring commercial email.
+              </div>
+
+              <div className="auth-form-group">
+                <label>Astronaut Full Legal Name</label>
+                <div className="auth-input-wrapper">
+                  <User size={16} />
+                  <input
+                    type="text"
+                    className="auth-input"
+                    placeholder="Candidate Name"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                <div className="auth-form-group">
+                  <label>Space Agency</label>
+                  <select
+                    className="auth-select"
+                    value={agency}
+                    onChange={(e) => setAgency(e.target.value)}
+                  >
+                    <option value="NASA">NASA (United States)</option>
+                    <option value="ESA">ESA (Europe)</option>
+                    <option value="JAXA">JAXA (Japan)</option>
+                    <option value="CSA">CSA (Canada)</option>
+                  </select>
+                </div>
+
+                <div className="auth-form-group">
+                  <label>Astronaut Badge / ID No.</label>
+                  <div className="auth-input-wrapper">
+                    <ShieldCheck size={16} />
+                    <input
+                      type="text"
+                      className="auth-input"
+                      placeholder="e.g. NASA-621"
+                      value={astronautId}
+                      onChange={(e) => setAstronautId(e.target.value.toUpperCase())}
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                <div className="auth-form-group">
+                  <label>Requested Callsign</label>
+                  <div className="auth-input-wrapper">
+                    <Zap size={16} />
+                    <input
+                      type="text"
+                      className="auth-input"
+                      placeholder="e.g. NOVA-1"
+                      value={callsign}
+                      onChange={(e) => setCallsign(e.target.value.toUpperCase())}
+                    />
+                  </div>
+                </div>
+
+                <div className="auth-form-group">
+                  <label>Operational Role</label>
+                  <select
+                    className="auth-select"
+                    value={requestedRole}
+                    onChange={(e) => setRequestedRole(e.target.value)}
+                  >
+                    <option value="MISSION SPECIALIST">MISSION SPECIALIST</option>
+                    <option value="FLIGHT ENGINEER">FLIGHT ENGINEER</option>
+                    <option value="PAYLOAD SPECIALIST">PAYLOAD SPECIALIST</option>
+                    <option value="SCIENCE OFFICER">SCIENCE OFFICER</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="auth-form-group">
+                <label>Flight Security Access PIN (6+ characters)</label>
+                <div className="auth-input-wrapper">
+                  <Key size={16} />
+                  <input
+                    type="password"
+                    className="auth-input"
+                    placeholder="Enter 6-digit PIN"
+                    value={pin}
+                    onChange={(e) => setPin(e.target.value)}
+                    required
+                    minLength={6}
+                  />
+                </div>
+              </div>
+
+              <div className="auth-form-group">
+                <label>Statement of Intent (Optional)</label>
+                <textarea
+                  className="auth-textarea"
+                  placeholder="State your flight readiness, mission assignment context, or expedition specialization..."
+                  value={statement}
+                  onChange={(e) => setStatement(e.target.value)}
+                />
+              </div>
+
+              <button type="submit" className="auth-btn-primary" disabled={isLoading}>
+                {isLoading ? <RefreshCw size={16} className="animate-spin" /> : <FileText size={16} />}
+                Enlist Astronaut & Issue Flight PIN
+              </button>
+
+              <div className="auth-switch-links">
+                <span>Already registered?</span>
+                <button
+                  type="button"
+                  className="auth-text-btn"
+                  onClick={() => {
+                    setView('LOGIN')
+                    setLocalError(null)
+                  }}
+                >
+                  Sign In to Station
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
