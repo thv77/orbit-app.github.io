@@ -307,13 +307,13 @@ export default function EmergencyCenterScreen({ setPage, crew = DEFAULT_CREW }) 
       {priority === 'CRITICAL' && (
         <div className="ec-critical-warning" role="alert">
           <AlertTriangle size={14} />
-          CRITICAL PRIORITY ACTIVE · ALL RESPONSE PROTOCOLS ENGAGE · DEMO MODE ONLY
+          Critical priority active · all response protocols engage · demo mode only
         </div>
       )}
       {priority === 'ELEVATED' && (
         <div className="ec-critical-warning ec-elevated-warning" role="status">
           <AlertTriangle size={14} />
-          ELEVATED PRIORITY · HEIGHTENED MONITORING ACTIVE · SIMULATION
+          Elevated priority · heightened monitoring active · simulation
         </div>
       )}
 
@@ -321,7 +321,7 @@ export default function EmergencyCenterScreen({ setPage, crew = DEFAULT_CREW }) 
       {drillActive && (
         <div className="ec-drill-banner" role="alert" aria-label="Training drill active">
           <div>
-            <div className="ec-drill-label">⚠ TRAINING DRILL ONLY · NOT A REAL EMERGENCY</div>
+            <div className="ec-drill-label">⚠ Training drill only · not a real emergency</div>
             <div className="ec-drill-sub">
               Solar Radiation Drill · Demonstration scenario · No real sensor data
             </div>
@@ -331,7 +331,7 @@ export default function EmergencyCenterScreen({ setPage, crew = DEFAULT_CREW }) 
             onClick={handleDrillToggle}
             aria-label="Stop drill"
           >
-            STOP DRILL
+            Stop drill
           </button>
         </div>
       )}
@@ -341,7 +341,7 @@ export default function EmergencyCenterScreen({ setPage, crew = DEFAULT_CREW }) 
         <div>
           <div className="ec-eyebrow">
             <span className="ec-red-dot" />
-            MISSION SUPPORT · SIMULATED EMERGENCY CHANNEL
+            Mission support · simulated emergency channel
           </div>
           <h1 className="ec-title">
             Emergency <em>Center</em>
@@ -409,7 +409,7 @@ export default function EmergencyCenterScreen({ setPage, crew = DEFAULT_CREW }) 
             </div>
           ))}
         </div>
-        <span className="ec-crew-simulated">SIMULATED READINGS · NOT LIVE SENSOR DATA</span>
+        <span className="ec-crew-simulated">Simulated readings · not live sensor data</span>
       </section>
 
       {/* ── Main Two-Column Grid ── */}
@@ -422,7 +422,7 @@ export default function EmergencyCenterScreen({ setPage, crew = DEFAULT_CREW }) 
           <div className="ec-panel">
             <div className="ec-panel-head">
               <span className="ec-panel-title">Crew Radar · Status Overview</span>
-              <span className="ec-panel-tag">DEMO · NOT LIVE</span>
+              <span className="ec-panel-tag">Demo · not live</span>
             </div>
             <div className="ec-radar-wrap">
               <div className="ec-radar-canvas-box">
@@ -449,7 +449,7 @@ export default function EmergencyCenterScreen({ setPage, crew = DEFAULT_CREW }) 
                   </div>
                 ))}
                 <div className="ec-radar-legend-item" style={{ marginTop: 6 }}>
-                  <span className="ec-radar-legend-dot" style={{ background: '#22d3ee' }} />
+                  <span className="ec-radar-legend-dot" style={{ background: 'var(--accent)' }} />
                   <span>Sweep · {drillActive ? 'DRILL' : 'STANDBY'}</span>
                 </div>
               </div>
@@ -460,7 +460,7 @@ export default function EmergencyCenterScreen({ setPage, crew = DEFAULT_CREW }) 
           <div className="ec-panel">
             <div className="ec-panel-head">
               <span className="ec-panel-title">Incident Channel</span>
-              <span className="ec-panel-tag">NO SIGNAL · DEMO</span>
+              <span className="ec-panel-tag">No signal</span>
             </div>
             <div className="ec-incident-body">
               <div className="ec-shield-pulse">
@@ -470,10 +470,10 @@ export default function EmergencyCenterScreen({ setPage, crew = DEFAULT_CREW }) 
               <p className="ec-incident-p">
                 This prototype has no active incident feed or emergency connection.
               </p>
-              <span className="ec-tag-clear"><i />SIMULATION CLEAR</span>
+              <span className="ec-tag-clear"><i />Simulation clear</span>
             </div>
             <div className="ec-incident-foot">
-              <span>LAST DEMO SYSTEM CHECK</span>
+              <span>Last demo system check</span>
               <b>09:42:16 UTC</b>
             </div>
           </div>
@@ -482,7 +482,7 @@ export default function EmergencyCenterScreen({ setPage, crew = DEFAULT_CREW }) 
           <div className="ec-panel">
             <div className="ec-panel-head">
               <span className="ec-panel-title">System Status Board</span>
-              <span className="ec-panel-tag">DEMO VALUES</span>
+              <span className="ec-panel-tag">Demo values</span>
             </div>
             <div className="ec-status-board">
               {SYSTEM_STATUS.map(sys => {
@@ -513,7 +513,7 @@ export default function EmergencyCenterScreen({ setPage, crew = DEFAULT_CREW }) 
           <div className="ec-panel">
             <div className="ec-panel-head">
               <span className="ec-panel-title">Mission Response Sequence</span>
-              <span className="ec-panel-tag">DEMO CHECKLIST</span>
+              <span className="ec-panel-tag">Demo checklist</span>
             </div>
 
             <div className="ec-steps" role="list">
@@ -543,9 +543,9 @@ export default function EmergencyCenterScreen({ setPage, crew = DEFAULT_CREW }) 
               aria-pressed={ack}
             >
               {ack ? (
-                <><Check size={15} /> PROTOCOL REVIEWED · DEMO</>
+                <><Check size={15} /> Protocol reviewed</>
               ) : (
-                <>ACKNOWLEDGE DEMO PROTOCOL <ChevronRight size={15} /></>
+                <>Acknowledge demo protocol <ChevronRight size={15} /></>
               )}
             </button>
 
@@ -562,7 +562,7 @@ export default function EmergencyCenterScreen({ setPage, crew = DEFAULT_CREW }) 
                 <Radiation size={13} style={{ display: 'inline', marginRight: 6, verticalAlign: 'middle' }} />
                 Solar Storm Drill
               </span>
-              <span className="ec-panel-tag">TRAINING ONLY</span>
+              <span className="ec-panel-tag">Training only</span>
             </div>
 
             <div className="ec-drill-panel-body">
@@ -603,7 +603,7 @@ export default function EmergencyCenterScreen({ setPage, crew = DEFAULT_CREW }) 
 
               {/* Training note */}
               <div className="ec-drill-training-note">
-                TRAINING DRILL ONLY · NOT A REAL EMERGENCY
+                Training drill only · not a real emergency
                 <br />
                 No sensor data · No crew actions required · Demonstration scenario
               </div>

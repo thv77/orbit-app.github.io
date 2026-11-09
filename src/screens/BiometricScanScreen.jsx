@@ -468,7 +468,7 @@ export default function BiometricScanScreen({ setPage }) {
       {/* ── Page header ── */}
       <header className="bs-header">
         <div className="bs-header-left">
-          <span className="bs-eyebrow">ORBIT HEALTH / MEDICAL SYSTEMS / BIOMETRIC SCAN</span>
+          <span className="bs-eyebrow">Orbit Health / medical systems / biometric scan</span>
           <h1 className="bs-title">
             Biometric <em>Scan</em>
           </h1>
@@ -481,13 +481,13 @@ export default function BiometricScanScreen({ setPage }) {
             ))}
           </div>
           <span className="bs-badge bs-badge--off">
-            <CameraOff size={11} /> CAM: NOT CONNECTED
+            <CameraOff size={11} /> CAM: not connected
           </span>
           <span className="bs-badge bs-badge--off">
-            <ShieldOff size={11} /> ANALYSIS: DISABLED
+            <ShieldOff size={11} /> Analysis: disabled
           </span>
           <span className="bs-badge bs-badge--demo">
-            SIMULATED DEMO
+            Simulated demo
           </span>
         </div>
       </header>
@@ -496,7 +496,7 @@ export default function BiometricScanScreen({ setPage }) {
       <div className="bs-disconnected-bar" role="status">
         <AlertTriangle size={13} />
         <span>
-          <strong>CAMERA: NOT CONNECTED · NO BIOMETRIC ANALYSIS ·</strong>{' '}
+          <strong>Camera: not connected · no biometric analysis ·</strong>{' '}
           No real biometric values are collected or produced. This is a visual demonstration only.
         </span>
       </div>
@@ -515,7 +515,7 @@ export default function BiometricScanScreen({ setPage }) {
                 aria-hidden="true"
               />
               <span className="bs-eyebrow">
-                {scanning ? 'SCAN ANIMATION RUNNING' : 'STANDBY · NO CAMERA'}
+                {scanning ? 'Scan animation running' : 'Standby · no camera'}
               </span>
             </div>
 
@@ -572,16 +572,16 @@ export default function BiometricScanScreen({ setPage }) {
             <div className="bs-stage-bottom-left">
               <span className="bs-cam-off">
                 <CameraOff size={11} />
-                CAMERA: NOT CONNECTED
+                Camera: not connected
               </span>
               <span style={{ color: 'rgba(140,180,195,0.3)' }}>·</span>
               <span className="bs-cam-off">
                 <ShieldOff size={11} />
-                BIOMETRIC ANALYSIS: DISABLED
+                Biometric analysis: disabled
               </span>
             </div>
             <div className="bs-stage-bottom-right">
-              <span className="bs-eyebrow">VISUAL PROTOTYPE ONLY</span>
+              <span className="bs-eyebrow">Visual prototype only</span>
             </div>
           </div>
         </section>
@@ -591,7 +591,7 @@ export default function BiometricScanScreen({ setPage }) {
 
           {/* Intro */}
           <div className="bs-details-section">
-            <span className="bs-eyebrow">VISUAL PROTOTYPE · NO SENSOR LINK</span>
+            <span className="bs-eyebrow">Visual prototype · no sensor link</span>
             <h2 className="bs-scan-heading">
               A scan sequence,<br />
               <em>without a sensor.</em>
@@ -605,7 +605,7 @@ export default function BiometricScanScreen({ setPage }) {
           {/* Animated 4-step sequence */}
           <div className="bs-details-section">
             <span className="bs-eyebrow" style={{ display: 'block', marginBottom: '0.65rem' }}>
-              SCAN SEQUENCE · ANIMATION STEPS
+              Scan sequence · animation steps
             </span>
             <div className="bs-steps">
               {SCAN_STEPS.map((step, idx) => {
@@ -656,12 +656,12 @@ export default function BiometricScanScreen({ setPage }) {
               {scanning ? (
                 <>
                   <RefreshCw size={15} style={{ animation: 'spin 1s linear infinite' }} />
-                  STOP SCAN ANIMATION
+                  Stop scan animation
                 </>
               ) : (
                 <>
                   <ScanFace size={15} />
-                  PLAY SCAN ANIMATION
+                  Play scan animation
                 </>
               )}
             </button>
@@ -682,13 +682,13 @@ export default function BiometricScanScreen({ setPage }) {
           {/* Baseline comparison */}
           <div className="bs-details-section">
             <div className="bs-baseline-head">
-              <span className="bs-eyebrow">PERSONAL BASELINE · DEMO</span>
+              <span className="bs-eyebrow">Personal baseline</span>
               <button
                 className="bs-text-btn"
                 onClick={() => setCompared(v => !v)}
                 aria-expanded={compared}
               >
-                {compared ? 'RESET COMPARISON' : 'COMPARE TO BASELINE'}
+                {compared ? 'Reset comparison' : 'Compare to baseline'}
                 <ChevronRight size={12} />
               </button>
             </div>
@@ -720,7 +720,7 @@ export default function BiometricScanScreen({ setPage }) {
           {history.length > 0 && (
             <div className="bs-details-section">
               <span className="bs-history-eyebrow">
-                LOCAL SCAN HISTORY · ANIMATION ONLY
+                Local scan history · animation only
               </span>
               <div className="bs-history-items" aria-live="polite">
                 {history.slice(0, 3).map(item => (

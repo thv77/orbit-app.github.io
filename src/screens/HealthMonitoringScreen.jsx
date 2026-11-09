@@ -250,7 +250,7 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
         <div className="hm-title-block">
           <div className="hm-eyebrow">
             <Activity size={13} className="hm-icon-cyan" />
-            <span>ORBIT HEALTH // CLINICAL MONITORING</span>
+            <span>Orbit Health · clinical monitoring</span>
           </div>
           <h1>Health Monitoring</h1>
           <p>
@@ -260,7 +260,7 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
 
         <div className="hm-header-controls">
           <label className="hm-crew-selector">
-            <span className="hm-selector-label">ACTIVE ASTRONAUT SUBJECT</span>
+            <span className="hm-selector-label">Active astronaut subject</span>
             <div className="hm-select-wrapper">
               <select value={selectedCrew} onChange={e => setSelectedCrew(e.target.value)}>
                 {crew.map(c => (
@@ -272,7 +272,7 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
               <ChevronDown size={14} className="hm-select-icon" />
             </div>
           </label>
-          <span className="hm-sim-badge">SIMULATED DEMONSTRATION DATA</span>
+          <span className="hm-sim-badge">Simulated demonstration data</span>
         </div>
       </header>
 
@@ -285,7 +285,7 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
           <div className="hm-stage-header">
             <div>
               <span className="hm-stage-eyebrow">
-                SUBJECT: {currentMember.name.toUpperCase()} · {currentMember.role}
+                Subject: {currentMember.name} · {currentMember.role}
               </span>
               <h3>3D Holographic Digital Twin</h3>
             </div>
@@ -293,7 +293,7 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
               <span className={`hm-status-tag ${currentMember.state === 'MONITOR' ? 'warn' : 'ok'}`}>
                 {currentMember.state}
               </span>
-              <span className="hm-status-tag cyan">3D INTERACTIVE</span>
+              <span className="hm-status-tag cyan">3D interactive</span>
             </div>
           </div>
 
@@ -303,7 +303,7 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
 
             {/* Layer Switcher HUD Controls */}
             <div className="hm-layer-hud">
-              <span className="hm-hud-label">ANATOMICAL LAYER</span>
+              <span className="hm-hud-label">Anatomical layer</span>
               <div className="hm-layer-buttons">
                 {[
                   { id: 'ALL_SYSTEMS', label: 'COMPOSITE' },
@@ -325,10 +325,10 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
 
             {/* Viewport Reset & Drag Hints */}
             <div className="hm-canvas-overlay-footer">
-              <span className="hm-drag-hint">CLICK REGION TO FOCUS · DRAG TO ORBIT · WHEEL TO ZOOM</span>
+              <span className="hm-drag-hint">Click region to focus · drag to orbit · wheel to zoom</span>
               <button className="hm-reset-btn" onClick={handleResetFocus} title="Reset camera view">
                 <RotateCcw size={12} />
-                <span>RESET FOCUS</span>
+                <span>Reset focus</span>
               </button>
             </div>
           </div>
@@ -340,7 +340,7 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
               <div className="hm-wave-header">
                 <div className="hm-wave-title">
                   <HeartPulse size={14} className="hm-wave-icon red" />
-                  <span>LEAD II ECG · SINUS RHYTHM</span>
+                  <span>Lead II ECG · sinus rhythm</span>
                 </div>
                 <strong className="hm-wave-val">{68 + baselineOffset} <small>BPM</small></strong>
               </div>
@@ -377,7 +377,7 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
               <div className="hm-wave-header">
                 <div className="hm-wave-title">
                   <Wind size={14} className="hm-wave-icon teal" />
-                  <span>CAPNOGRAPHY RESPIRATION</span>
+                  <span>Capnography respiration</span>
                 </div>
                 <strong className="hm-wave-val">14 <small>BR/MIN</small></strong>
               </div>
@@ -396,10 +396,10 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
           <div className="hm-anatomy-card">
             <div className="hm-card-header">
               <div>
-                <span className="hm-card-eyebrow">{currentOrganInfo.system.toUpperCase()}</span>
+                <span className="hm-card-eyebrow">{currentOrganInfo.system}</span>
                 <h2>{selectedOrgan}</h2>
               </div>
-              <span className="hm-anatomy-tag">FOCUSED ANATOMY</span>
+              <span className="hm-anatomy-tag">Focused anatomy</span>
             </div>
 
             <div className="hm-organ-status-bar">
@@ -410,15 +410,15 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
             {/* Comparative Baseline Matrix for this Organ */}
             <div className="hm-organ-metrics">
               <div className="hm-metric-field">
-                <small>PRE-FLIGHT BASELINE</small>
+                <small>Pre-flight baseline</small>
                 <strong>{currentOrganInfo.baseline}</strong>
               </div>
               <div className="hm-metric-field">
-                <small>CURRENT IN-FLIGHT READING</small>
+                <small>Current in-flight reading</small>
                 <strong className="cyan">{currentOrganInfo.current}</strong>
               </div>
               <div className="hm-metric-field">
-                <small>PHYSIOLOGICAL VARIANCE</small>
+                <small>Physiological variance</small>
                 <span>{currentOrganInfo.variance}</span>
               </div>
             </div>
@@ -427,14 +427,14 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
             <div className="hm-space-insight">
               <div className="hm-insight-header">
                 <Orbit size={14} className="hm-icon-cyan" />
-                <span>MICROGRAVITY ADAPTATION CONTEXT</span>
+                <span>Microgravity adaptation context</span>
               </div>
               <p>{currentOrganInfo.microgravityNote}</p>
             </div>
 
             {/* Accessible 2D Region Buttons */}
             <div className="hm-region-selector-wrap">
-              <span className="hm-selector-title">SELECT ANATOMICAL STRUCTURE</span>
+              <span className="hm-selector-title">Select anatomical structure</span>
               <div className="hm-region-pills">
                 {selectableRegions.map(reg => (
                   <button
@@ -458,7 +458,7 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
         {/* Heart Rate Tile */}
         <article className="hm-vital-tile cyan">
           <div className="hm-tile-top">
-            <span className="hm-tile-label">RESTING HEART RATE</span>
+            <span className="hm-tile-label">Resting heart rate</span>
             <HeartPulse size={18} className="hm-tile-icon" />
           </div>
           <div className="hm-tile-value">
@@ -466,14 +466,14 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
           </div>
           <div className="hm-tile-bottom">
             <span className="hm-delta good">PRE: {66 + baselineOffset} BPM (+2)</span>
-            <span className="hm-telemetry-tag">SINUS RHYTHM</span>
+            <span className="hm-telemetry-tag">Sinus rhythm</span>
           </div>
         </article>
 
         {/* Blood Oxygen Tile */}
         <article className="hm-vital-tile blue">
           <div className="hm-tile-top">
-            <span className="hm-tile-label">BLOOD OXYGENATION</span>
+            <span className="hm-tile-label">Blood oxygenation</span>
             <Waves size={18} className="hm-tile-icon" />
           </div>
           <div className="hm-tile-value">
@@ -481,45 +481,45 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
             <small>% SpO₂</small>
           </div>
           <div className="hm-tile-bottom">
-            <span className="hm-delta good">OPTIMAL PERFUSION</span>
-            <span className="hm-telemetry-tag">PULSE OX</span>
+            <span className="hm-delta good">Optimal perfusion</span>
+            <span className="hm-telemetry-tag">Pulse ox</span>
           </div>
         </article>
 
         {/* Body Temperature Tile */}
         <article className="hm-vital-tile amber">
           <div className="hm-tile-top">
-            <span className="hm-tile-label">CORE TEMPERATURE</span>
+            <span className="hm-tile-label">Core temperature</span>
             <Thermometer size={18} className="hm-tile-icon" />
           </div>
           <div className="hm-tile-value">
             {(36.7 + baselineOffset / 10).toFixed(1)} <small>°C</small>
           </div>
           <div className="hm-tile-bottom">
-            <span className="hm-delta good">EUXERMIC RANGE</span>
-            <span className="hm-telemetry-tag">CORE SENSOR</span>
+            <span className="hm-delta good">Euxermic range</span>
+            <span className="hm-telemetry-tag">Core sensor</span>
           </div>
         </article>
 
         {/* Blood Pressure Tile */}
         <article className="hm-vital-tile violet">
           <div className="hm-tile-top">
-            <span className="hm-tile-label">ARTERIAL BLOOD PRESSURE</span>
+            <span className="hm-tile-label">Arterial blood pressure</span>
             <Activity size={18} className="hm-tile-icon" />
           </div>
           <div className="hm-tile-value">
             {114 + baselineOffset}/{74 + Math.round(baselineOffset / 2)} <small>mmHg</small>
           </div>
           <div className="hm-tile-bottom">
-            <span className="hm-delta good">NORMOTENSIVE</span>
-            <span className="hm-telemetry-tag">CUFFLESS CONTINUOUS</span>
+            <span className="hm-delta good">Normotensive</span>
+            <span className="hm-telemetry-tag">Cuffless continuous</span>
           </div>
         </article>
 
         {/* Sleep & Circadian Recovery */}
         <article className="hm-vital-tile teal hm-sleep-tile">
           <div className="hm-tile-top">
-            <span className="hm-tile-label">CIRCADIAN SLEEP SCORE</span>
+            <span className="hm-tile-label">Circadian sleep score</span>
             <Moon size={18} className="hm-tile-icon" />
           </div>
           <div className="hm-sleep-readout">
@@ -543,7 +543,7 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
         <div className="hm-trend-card">
           <div className="hm-trend-header">
             <div>
-              <span className="hm-trend-eyebrow">CONTINUOUS BIOMETRIC STREAM</span>
+              <span className="hm-trend-eyebrow">Continuous biometric stream</span>
               <h3>Longitudinal Heart Rate & Cardiovascular Stability</h3>
             </div>
             <div className="hm-window-tabs">
@@ -572,7 +572,7 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
               <span>06:00 UTC</span>
               <span>08:00 UTC</span>
               <span>10:00 UTC</span>
-              <span>12:00 UTC (NOW)</span>
+              <span>12:00 UTC (now)</span>
             </div>
           </div>
         </div>
@@ -581,7 +581,7 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
           <div className="hm-interp-header">
             <ShieldCheck size={20} className="hm-icon-teal" />
             <div>
-              <span className="hm-trend-eyebrow">FLIGHT SURGEON INTERPRETATION</span>
+              <span className="hm-trend-eyebrow">Flight surgeon interpretation</span>
               <h3>Physiological Safety Limit Verification</h3>
             </div>
           </div>
@@ -590,7 +590,7 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
             Continuous algorithms check for hemodynamic anomalies, SANS progression, and dehydration indicators without replacing certified mission medical protocol.
           </p>
           <div className="hm-interp-footer">
-            <span className="hm-safety-note">PROTOTYPE CONCEPT · FLIGHT SURGEON AUTHORIZATION REQUIRED</span>
+            <span className="hm-safety-note">Prototype concept · flight surgeon authorization required</span>
           </div>
         </div>
       </section>
@@ -601,10 +601,10 @@ export default function HealthMonitoringScreen({ setPage, crew = [] }) {
       <div className="hm-modules-wrapper">
         <div className="hm-modules-intro">
           <div>
-            <span className="hm-trend-eyebrow">EXPEDITION 07 HEALTH SUBSYSTEMS</span>
+            <span className="hm-trend-eyebrow">Expedition 07 health subsystems</span>
             <h2>Integrated Clinical Modules</h2>
           </div>
-          <span className="hm-sim-badge">ALL 8 SUBSYSTEMS ACTIVE</span>
+          <span className="hm-sim-badge">All 8 subsystems active</span>
         </div>
         <HealthModules />
       </div>

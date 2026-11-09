@@ -145,7 +145,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
               <Orbit size={20} />
             </div>
             <div className="auth-brand-text">
-              <h2>ORBIT HEALTH</h2>
+              <h2>Orbit Health</h2>
               <span>
                 {view === 'LOGIN' && 'Personnel Authentication'}
                 {view === 'REGISTER' && 'Astronaut Enlistment'}
@@ -164,10 +164,10 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span className={`auth-mode-pill ${isDemoMode ? 'demo' : 'live'}`}>
               <Shield size={13} />
-              {isDemoMode ? 'PROTOTYPE DEMO MODE' : 'LIVE SUPABASE AUTH'}
+              {isDemoMode ? 'Prototype demo mode' : 'Live Supabase auth'}
             </span>
             {user && (
-              <span style={{ fontSize: '0.72rem', color: '#9ca3af', fontFamily: 'monospace' }}>
+              <span style={{ fontSize: '0.72rem', color: 'var(--text-2)', fontFamily: 'monospace' }}>
                 SESSION: {user.email}
               </span>
             )}
@@ -196,14 +196,14 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                   padding: '0.65rem 0.75rem',
                   borderRadius: '6px',
                   border: 'none',
-                  background: view === 'LOGIN' ? 'linear-gradient(135deg, rgba(2, 132, 199, 0.3) 0%, rgba(56, 189, 248, 0.25) 100%)' : 'transparent',
-                  color: view === 'LOGIN' ? '#38bdf8' : '#94a3b8',
+                  background: view === 'LOGIN' ? 'rgba(98,212,200,0.18)' : 'transparent',
+                  color: view === 'LOGIN' ? 'var(--accent)' : 'var(--text-2)',
                   fontWeight: view === 'LOGIN' ? 700 : 500,
                   fontSize: '0.82rem',
                   letterSpacing: '0.04em',
                   cursor: 'pointer',
                   transition: 'all 0.15s ease',
-                  borderBottom: view === 'LOGIN' ? '2px solid #38bdf8' : '2px solid transparent',
+                  borderBottom: view === 'LOGIN' ? '2px solid var(--accent)' : '2px solid transparent',
                   fontFamily: 'var(--font-mono, monospace)',
                   display: 'flex',
                   alignItems: 'center',
@@ -212,7 +212,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                 }}
               >
                 <LogIn size={15} />
-                SIGN IN
+                Sign in
               </button>
               <button
                 type="button"
@@ -224,14 +224,14 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                   padding: '0.65rem 0.75rem',
                   borderRadius: '6px',
                   border: 'none',
-                  background: view === 'REGISTER' ? 'linear-gradient(135deg, rgba(2, 132, 199, 0.3) 0%, rgba(56, 189, 248, 0.25) 100%)' : 'transparent',
-                  color: view === 'REGISTER' ? '#38bdf8' : '#94a3b8',
+                  background: view === 'REGISTER' ? 'rgba(98,212,200,0.18)' : 'transparent',
+                  color: view === 'REGISTER' ? 'var(--accent)' : 'var(--text-2)',
                   fontWeight: view === 'REGISTER' ? 700 : 500,
                   fontSize: '0.82rem',
                   letterSpacing: '0.04em',
                   cursor: 'pointer',
                   transition: 'all 0.15s ease',
-                  borderBottom: view === 'REGISTER' ? '2px solid #38bdf8' : '2px solid transparent',
+                  borderBottom: view === 'REGISTER' ? '2px solid var(--accent)' : '2px solid transparent',
                   fontFamily: 'var(--font-mono, monospace)',
                   display: 'flex',
                   alignItems: 'center',
@@ -240,7 +240,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                 }}
               >
                 <UserPlus size={15} />
-                ENLIST AS ASTRONAUT
+                Enlist as astronaut
               </button>
             </div>
           )}
@@ -257,10 +257,10 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
             <div
               style={{
                 padding: '0.75rem 1rem',
-                background: 'rgba(16, 185, 129, 0.12)',
-                border: '1px solid rgba(16, 185, 129, 0.35)',
+                background: 'rgba(76,195,138,0.07)',
+                border: '1px solid rgba(76,195,138,0.21)',
                 borderRadius: '8px',
-                color: '#34d399',
+                color: 'var(--ok)',
                 fontSize: '0.82rem',
                 display: 'flex',
                 alignItems: 'center',
@@ -274,18 +274,18 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
 
           {/* VIEW: EMAIL VERIFICATION REQUIRED */}
           {user && isEmailUnconfirmed ? (
-            <div className="pending-quarantine-box" style={{ borderColor: 'rgba(56, 189, 248, 0.4)' }}>
-              <div className="quarantine-icon-ring" style={{ background: 'rgba(56, 189, 248, 0.15)', borderColor: '#38bdf8' }}>
-                <Mail size={30} color="#38bdf8" />
+            <div className="pending-quarantine-box" style={{ borderColor: 'rgba(98,212,200,0.4)' }}>
+              <div className="quarantine-icon-ring" style={{ background: 'rgba(98,212,200,0.15)', borderColor: 'var(--accent)' }}>
+                <Mail size={30} color="var(--accent)" />
               </div>
               <div>
-                <h3 style={{ margin: '0 0 0.35rem', color: '#38bdf8', fontSize: '1.05rem' }}>
+                <h3 style={{ margin: '0 0 0.35rem', color: 'var(--accent)', fontSize: '1.05rem' }}>
                   Verification Email Dispatched
                 </h3>
-                <p style={{ margin: 0, fontSize: '0.82rem', color: '#d1d5db', lineHeight: 1.4 }}>
+                <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text)', lineHeight: 1.4 }}>
                   Your astronaut account has been provisioned. To unlock telemetry operations, please click the confirmation link sent to:
                 </p>
-                <div style={{ marginTop: '0.5rem', fontFamily: 'monospace', color: '#38bdf8', fontSize: '0.85rem' }}>
+                <div style={{ marginTop: '0.5rem', fontFamily: 'monospace', color: 'var(--accent)', fontSize: '0.85rem' }}>
                   {user.email}
                 </div>
               </div>
@@ -294,7 +294,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                 <button
                   type="button"
                   className="auth-btn-primary"
-                  style={{ background: 'rgba(56, 189, 248, 0.2)', borderColor: 'rgba(56, 189, 248, 0.4)' }}
+                  style={{ background: 'rgba(98,212,200,0.2)', borderColor: 'rgba(98,212,200,0.4)' }}
                   onClick={() => window.location.reload()}
                 >
                   <RefreshCw size={16} /> I Have Confirmed My Email
@@ -302,7 +302,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                 <button
                   type="button"
                   className="auth-btn-primary"
-                  style={{ background: 'rgba(239, 68, 68, 0.15)', borderColor: 'rgba(239, 68, 68, 0.35)' }}
+                  style={{ background: 'rgba(229,96,79,0.15)', borderColor: 'rgba(229,96,79,0.35)' }}
                   onClick={() => logout()}
                 >
                   <LogOut size={16} /> Sign Out
@@ -315,10 +315,10 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                 <ShieldAlert size={30} />
               </div>
               <div>
-                <h3 style={{ margin: '0 0 0.35rem', color: '#f59e0b', fontSize: '1.05rem' }}>
+                <h3 style={{ margin: '0 0 0.35rem', color: 'var(--warn)', fontSize: '1.05rem' }}>
                   Application Quarantined
                 </h3>
-                <p style={{ margin: 0, fontSize: '0.82rem', color: '#d1d5db', lineHeight: 1.4 }}>
+                <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text)', lineHeight: 1.4 }}>
                   Your astronaut self-registration has been submitted and is currently awaiting
                   administrative triage by Flight Operations.
                 </p>
@@ -326,24 +326,24 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
 
               <div className="quarantine-details">
                 <div>
-                  <strong>CALLSIGN REQUESTED:</strong>{' '}
-                  <span style={{ color: '#38bdf8' }}>
+                  <strong>Callsign requested:</strong>{' '}
+                  <span style={{ color: 'var(--accent)' }}>
                     {registrationRequest?.requestedCallsign || registrationRequest?.requested_callsign || 'PENDING'}
                   </span>
                 </div>
                 <div>
-                  <strong>OPERATIONAL ROLE:</strong>{' '}
+                  <strong>Operational role:</strong>{' '}
                   <span>
                     {registrationRequest?.requestedRole || registrationRequest?.requested_role || 'ASTRONAUT CANDIDATE'}
                   </span>
                 </div>
                 <div>
-                  <strong>STATUS:</strong>{' '}
-                  <span style={{ color: '#fbbf24', fontWeight: 600 }}>PENDING_APPROVAL</span>
+                  <strong>Status:</strong>{' '}
+                  <span style={{ color: 'var(--warn)', fontWeight: 600 }}>Pending_approval</span>
                 </div>
                 <div>
-                  <strong>CLEARANCE RESTRICTION:</strong>{' '}
-                  <span style={{ color: '#ef4444' }}>AIR-GAPPED (NO TELEMETRY ACCESS)</span>
+                  <strong>Clearance restriction:</strong>{' '}
+                  <span style={{ color: 'var(--danger)' }}>Air-gapped (no telemetry access)</span>
                 </div>
               </div>
 
@@ -351,14 +351,14 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                 <div
                   style={{
                     fontSize: '0.74rem',
-                    color: '#9ca3af',
+                    color: 'var(--text-2)',
                     background: 'rgba(255, 255, 255, 0.03)',
                     padding: '0.6rem 0.8rem',
                     borderRadius: '6px',
                     width: '100%',
                   }}
                 >
-                  <strong style={{ color: '#fbbf24' }}>DEMO SIMULATION:</strong> Use the demo selector below to switch
+                  <strong style={{ color: 'var(--warn)' }}>Demo simulation:</strong> Use the demo selector below to switch
                   to an Administrator persona to review and approve registrations.
                 </div>
               )}
@@ -374,7 +374,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                       onClick={() => handleQuickSelect('admin')}
                     >
                       <strong>Flight Director</strong>
-                      <small>ADMINISTRATOR</small>
+                      <small>Administrator</small>
                     </button>
                     <button
                       type="button"
@@ -382,7 +382,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                       onClick={() => handleQuickSelect('commander')}
                     >
                       <strong>Elena Vasquez</strong>
-                      <small>COMMANDER</small>
+                      <small>Commander</small>
                     </button>
                   </div>
                 </div>
@@ -390,22 +390,22 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
 
               <button
                 className="auth-btn-primary"
-                style={{ background: 'rgba(239, 68, 68, 0.2)', borderColor: 'rgba(239, 68, 68, 0.4)' }}
+                style={{ background: 'rgba(229,96,79,0.2)', borderColor: 'rgba(229,96,79,0.4)' }}
                 onClick={() => logout()}
               >
                 <LogOut size={16} /> Sign Out of Candidate Account
               </button>
             </div>
           ) : user && registrationState === 'provisioning' ? (
-            <div className="pending-quarantine-box" style={{ borderColor: 'rgba(245, 158, 11, 0.4)' }}>
-              <div className="quarantine-icon-ring" style={{ background: 'rgba(245, 158, 11, 0.15)', borderColor: '#f59e0b' }}>
-                <RefreshCw size={30} color="#f59e0b" />
+            <div className="pending-quarantine-box" style={{ borderColor: 'rgba(224,164,60,0.4)' }}>
+              <div className="quarantine-icon-ring" style={{ background: 'rgba(224,164,60,0.15)', borderColor: 'var(--warn)' }}>
+                <RefreshCw size={30} color="var(--warn)" />
               </div>
               <div>
-                <h3 style={{ margin: '0 0 0.35rem', color: '#f59e0b', fontSize: '1.05rem' }}>
+                <h3 style={{ margin: '0 0 0.35rem', color: 'var(--warn)', fontSize: '1.05rem' }}>
                   Personnel Dossier Provisioning
                 </h3>
-                <p style={{ margin: 0, fontSize: '0.82rem', color: '#d1d5db', lineHeight: 1.4 }}>
+                <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text)', lineHeight: 1.4 }}>
                   Your account is verified. Database triggers are generating your flight dossier, callsign assignment,
                   and baseline telemetry channels.
                 </p>
@@ -415,7 +415,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                 <button
                   type="button"
                   className="auth-btn-primary"
-                  style={{ background: 'rgba(245, 158, 11, 0.2)', borderColor: 'rgba(245, 158, 11, 0.4)', color: '#fbbf24' }}
+                  style={{ background: 'rgba(224,164,60,0.2)', borderColor: 'rgba(224,164,60,0.4)', color: 'var(--warn)' }}
                   onClick={async () => {
                     const res = await refreshSession()
                     if (res?.registrationState === 'active') {
@@ -428,7 +428,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                 <button
                   type="button"
                   className="auth-btn-primary"
-                  style={{ background: 'rgba(239, 68, 68, 0.15)', borderColor: 'rgba(239, 68, 68, 0.35)' }}
+                  style={{ background: 'rgba(229,96,79,0.15)', borderColor: 'rgba(229,96,79,0.35)' }}
                   onClick={() => logout()}
                 >
                   <LogOut size={16} /> Sign Out
@@ -436,15 +436,15 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
               </div>
             </div>
           ) : user && registrationState === 'provisioning_error' ? (
-            <div className="pending-quarantine-box" style={{ borderColor: 'rgba(239, 68, 68, 0.4)' }}>
-              <div className="quarantine-icon-ring" style={{ background: 'rgba(239, 68, 68, 0.15)', borderColor: '#ef4444' }}>
-                <AlertTriangle size={30} color="#ef4444" />
+            <div className="pending-quarantine-box" style={{ borderColor: 'rgba(229,96,79,0.4)' }}>
+              <div className="quarantine-icon-ring" style={{ background: 'rgba(229,96,79,0.15)', borderColor: 'var(--danger)' }}>
+                <AlertTriangle size={30} color="var(--danger)" />
               </div>
               <div>
-                <h3 style={{ margin: '0 0 0.35rem', color: '#ef4444', fontSize: '1.05rem' }}>
+                <h3 style={{ margin: '0 0 0.35rem', color: 'var(--danger)', fontSize: '1.05rem' }}>
                   Authorization Check Failed
                 </h3>
-                <p style={{ margin: 0, fontSize: '0.82rem', color: '#d1d5db', lineHeight: 1.4 }}>
+                <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text)', lineHeight: 1.4 }}>
                   Unable to establish authoritative clearance credentials with the flight operations server.
                 </p>
               </div>
@@ -453,7 +453,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                 <button
                   type="button"
                   className="auth-btn-primary"
-                  style={{ background: 'rgba(56, 189, 248, 0.2)', borderColor: 'rgba(56, 189, 248, 0.4)' }}
+                  style={{ background: 'rgba(98,212,200,0.2)', borderColor: 'rgba(98,212,200,0.4)' }}
                   onClick={() => refreshSession()}
                 >
                   <RefreshCw size={16} /> Retry Clearance Verification
@@ -461,7 +461,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                 <button
                   type="button"
                   className="auth-btn-primary"
-                  style={{ background: 'rgba(239, 68, 68, 0.15)', borderColor: 'rgba(239, 68, 68, 0.35)' }}
+                  style={{ background: 'rgba(229,96,79,0.15)', borderColor: 'rgba(229,96,79,0.35)' }}
                   onClick={() => logout()}
                 >
                   <LogOut size={16} /> Sign Out
@@ -487,7 +487,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                     width: '48px',
                     height: '48px',
                     borderRadius: '50%',
-                    background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
+                    background: 'rgba(98,212,200,0.6)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -503,7 +503,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                   <strong style={{ fontSize: '1rem', color: '#ffffff' }}>
                     {crewMember?.fullName || profile?.full_name || user.email}
                   </strong>
-                  <span style={{ fontSize: '0.78rem', color: '#38bdf8', fontFamily: 'monospace' }}>
+                  <span style={{ fontSize: '0.78rem', color: 'var(--accent)', fontFamily: 'monospace' }}>
                     {crewMember?.callsign ? `CALLSIGN: ${crewMember.callsign}` : user.email}
                   </span>
                   <div style={{ display: 'flex', gap: '0.35rem', marginTop: '0.35rem' }}>
@@ -514,7 +514,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                         </span>
                       ))
                     ) : (
-                      <span className="topbar-auth-role pending">NO ROLES ASSIGNED</span>
+                      <span className="topbar-auth-role pending">No roles assigned</span>
                     )}
                   </div>
                 </div>
@@ -531,7 +531,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                       onClick={() => handleQuickSelect('commander')}
                     >
                       <strong>Elena Vasquez</strong>
-                      <small>COMMANDER (ASTRONAUT)</small>
+                      <small>Commander (astronaut)</small>
                     </button>
                     <button
                       type="button"
@@ -539,7 +539,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                       onClick={() => handleQuickSelect('surgeon')}
                     >
                       <strong>Dr. Marcus Chen</strong>
-                      <small>FLIGHT SURGEON</small>
+                      <small>Flight surgeon</small>
                     </button>
                     <button
                       type="button"
@@ -547,7 +547,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                       onClick={() => handleQuickSelect('admin')}
                     >
                       <strong>Gene Kranz</strong>
-                      <small>ADMINISTRATOR</small>
+                      <small>Administrator</small>
                     </button>
                     <button
                       type="button"
@@ -555,7 +555,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                       onClick={() => handleQuickSelect('pending')}
                     >
                       <strong>Astra Cadet</strong>
-                      <small>PENDING APPROVAL</small>
+                      <small>Pending approval</small>
                     </button>
                   </div>
                 </div>
@@ -566,9 +566,9 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                   type="button"
                   className="auth-btn-primary"
                   style={{
-                    background: 'rgba(239, 68, 68, 0.15)',
-                    borderColor: 'rgba(239, 68, 68, 0.35)',
-                    color: '#fca5a5',
+                    background: 'rgba(229,96,79,0.15)',
+                    borderColor: 'rgba(229,96,79,0.35)',
+                    color: 'var(--danger)',
                   }}
                   onClick={() => logout()}
                 >
@@ -628,7 +628,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                       onClick={() => handleQuickSelect('commander')}
                     >
                       <strong>Elena Vasquez</strong>
-                      <small>COMMANDER · ASTRONAUT</small>
+                      <small>Commander · astronaut</small>
                     </button>
                     <button
                       type="button"
@@ -636,7 +636,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                       onClick={() => handleQuickSelect('surgeon')}
                     >
                       <strong>Dr. Marcus Chen</strong>
-                      <small>FLIGHT SURGEON</small>
+                      <small>Flight surgeon</small>
                     </button>
                     <button
                       type="button"
@@ -644,7 +644,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                       onClick={() => handleQuickSelect('admin')}
                     >
                       <strong>Flight Operations</strong>
-                      <small>ADMINISTRATOR</small>
+                      <small>Administrator</small>
                     </button>
                     <button
                       type="button"
@@ -652,7 +652,7 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                       onClick={() => handleQuickSelect('pending')}
                     >
                       <strong>Cadet Applicant</strong>
-                      <small>PENDING APPROVAL</small>
+                      <small>Pending approval</small>
                     </button>
                   </div>
                 </div>
@@ -678,15 +678,15 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
               <div
                 style={{
                   padding: '0.75rem 0.9rem',
-                  background: 'rgba(56, 189, 248, 0.08)',
-                  border: '1px solid rgba(56, 189, 248, 0.25)',
+                  background: 'rgba(98,212,200,0.08)',
+                  border: '1px solid rgba(98,212,200,0.25)',
                   borderRadius: '8px',
                   fontSize: '0.78rem',
-                  color: '#bae6fd',
+                  color: 'var(--text)',
                   lineHeight: 1.45,
                 }}
               >
-                <strong style={{ color: '#38bdf8' }}>NASA Spaceflight Protocol:</strong> Space travelers
+                <strong style={{ color: 'var(--accent)' }}>NASA Spaceflight Protocol:</strong> Space travelers
                 are assigned an official Astronaut Badge ID & Security PIN. Open enlistment automatically provisions
                 your flight dossier and telemetry channels without requiring commercial email.
               </div>
@@ -759,10 +759,10 @@ export default function AuthModals({ isOpen, onClose, initialView = 'LOGIN' }) {
                     value={requestedRole}
                     onChange={(e) => setRequestedRole(e.target.value)}
                   >
-                    <option value="MISSION SPECIALIST">MISSION SPECIALIST</option>
-                    <option value="FLIGHT ENGINEER">FLIGHT ENGINEER</option>
-                    <option value="PAYLOAD SPECIALIST">PAYLOAD SPECIALIST</option>
-                    <option value="SCIENCE OFFICER">SCIENCE OFFICER</option>
+                    <option value="MISSION SPECIALIST">Mission specialist</option>
+                    <option value="FLIGHT ENGINEER">Flight engineer</option>
+                    <option value="PAYLOAD SPECIALIST">Payload specialist</option>
+                    <option value="SCIENCE OFFICER">Science officer</option>
                   </select>
                 </div>
               </div>

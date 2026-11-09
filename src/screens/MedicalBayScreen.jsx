@@ -212,7 +212,7 @@ export default function MedicalBayScreen() {
         <div className="mb-title-block">
           <div className="mb-eyebrow">
             <Stethoscope size={13} className="mb-icon-cyan" />
-            <span>MODULE 03 // CLINICAL LABORATORY & TREATMENT STATION</span>
+            <span>Module 03 · clinical laboratory & treatment station</span>
           </div>
           <h1>Medical Bay Operations</h1>
           <p>
@@ -222,14 +222,14 @@ export default function MedicalBayScreen() {
 
         <div className="mb-header-stats">
           <div className="mb-stat-box">
-            <small>CLINICAL READINESS</small>
+            <small>Clinical readiness</small>
             <strong className="good">98.4<span>%</span></strong>
           </div>
           <div className="mb-stat-box">
-            <small>STERILE WORK SURFACE</small>
-            <strong className="cyan">ISO CLASS 5</strong>
+            <small>Sterile work surface</small>
+            <strong className="cyan">ISO class 5</strong>
           </div>
-          <span className="mb-sim-tag">SIMULATED CLINICAL ENVIRONMENT</span>
+          <span className="mb-sim-tag">Simulated clinical environment</span>
         </div>
       </header>
 
@@ -238,29 +238,29 @@ export default function MedicalBayScreen() {
         <div className="mb-telem-item">
           <Wind size={14} className="mb-icon-teal" />
           <div>
-            <small>LAMINAR AIR FLOW</small>
+            <small>Laminar air flow</small>
             <strong>0.45 m/s · HEPA Active</strong>
           </div>
         </div>
         <div className="mb-telem-item">
           <Activity size={14} className="mb-icon-cyan" />
           <div>
-            <small>CABIN PRESSURE</small>
+            <small>Cabin pressure</small>
             <strong>101.3 kPa · Sea Level Eq</strong>
           </div>
         </div>
         <div className="mb-telem-item">
           <Thermometer size={14} className="mb-icon-amber" />
           <div>
-            <small>BAY TEMPERATURE</small>
+            <small>Bay temperature</small>
             <strong>21.8 °C · Stable</strong>
           </div>
         </div>
         <div className="mb-telem-item">
           <ShieldCheck size={14} className="mb-icon-teal" />
           <div>
-            <small>STERILIZATION STATUS</small>
-            <strong>UV-C CYCLE COMPLIANT</strong>
+            <small>Sterilization status</small>
+            <strong>UV-C cycle compliant</strong>
           </div>
         </div>
       </div>
@@ -274,7 +274,7 @@ export default function MedicalBayScreen() {
             <Microscope size={22} className="mb-icon-cyan" />
           </div>
           <div>
-            <span className="mb-eyebrow">HARDWARE INSPECTION & CALIBRATION</span>
+            <span className="mb-eyebrow">Hardware inspection & calibration</span>
             <strong>Automated Clinical Instrument Diagnostic Routine</strong>
             <p>
               Runs transducer acoustic pulse check, telemetry sensor impedance calibration, and emergency life support O₂ seal integrity test.
@@ -284,7 +284,7 @@ export default function MedicalBayScreen() {
 
         <div className="mb-equip-3d-box">
           <canvas ref={equipCanvasRef} className="mb-equip-canvas" aria-label="3D Diagnostic Ultrasound Scanner & Docking Hub" />
-          <span className="mb-equip-hint">DRAG TO ROTATE 3D ULTRASOUND PROBE</span>
+          <span className="mb-equip-hint">Drag to rotate 3D ultrasound probe</span>
         </div>
 
         <div className="mb-diag-action">
@@ -301,7 +301,7 @@ export default function MedicalBayScreen() {
             ) : (
               <>
                 <Zap size={14} />
-                <span>RUN INSTRUMENT SELF-TEST</span>
+                <span>Run instrument self-test</span>
               </>
             )}
           </button>
@@ -352,7 +352,7 @@ export default function MedicalBayScreen() {
                 <div className="mb-inv-head">
                   <span className="mb-inv-cat">{item.category}</span>
                   <span className={`mb-status-pill ${item.status === 'CHECK' ? 'warn' : 'ok'}`}>
-                    {item.status === 'CHECK' ? 'INSPECTION DUE' : 'READY · CALIBRATED'}
+                    {item.status === 'CHECK' ? 'Inspection due' : 'Ready · calibrated'}
                   </span>
                 </div>
 
@@ -363,11 +363,11 @@ export default function MedicalBayScreen() {
 
                 <div className="mb-inv-specs">
                   <div>
-                    <small>QUANTITY ON BOARD</small>
+                    <small>Quantity on board</small>
                     <strong>{item.qty}</strong>
                   </div>
                   <div>
-                    <small>POWER / STATUS</small>
+                    <small>Power / status</small>
                     <strong>{item.battery}</strong>
                   </div>
                 </div>
@@ -437,7 +437,7 @@ export default function MedicalBayScreen() {
           <div className="mb-delivery-header">
             <div className="mb-deliv-badge">
               <LockKeyhole size={16} className="mb-icon-amber" />
-              <span>TELEMEDICINE MEDICATION WORKFLOW CONCEPT</span>
+              <span>Telemedicine medication workflow concept</span>
             </div>
             <h3>Dual-Authorization Medication Administration Protocol</h3>
           </div>
@@ -450,37 +450,37 @@ export default function MedicalBayScreen() {
             <div className={`mb-key-pod ${dualKeyAuth.commander ? 'authenticated' : ''}`}>
               <div className="mb-key-status">
                 <KeyRound size={15} />
-                <span>KEY 01: COMMANDER AUTHORIZATION</span>
+                <span>Key 01: commander authorization</span>
               </div>
-              <strong>{dualKeyAuth.commander ? 'AUTHORIZED · SIGNED' : 'AWAITING COMMANDER CONFIRMATION'}</strong>
+              <strong>{dualKeyAuth.commander ? 'Authorized · signed' : 'Awaiting commander confirmation'}</strong>
               <button
                 className="mb-btn-auth-commander"
                 onClick={() => setDualKeyAuth(p => ({ ...p, commander: !p.commander }))}
               >
-                {dualKeyAuth.commander ? 'REVOKE SIGNATURE' : 'SIGN AUTHORIZATION'}
+                {dualKeyAuth.commander ? 'Revoke signature' : 'Sign authorization'}
               </button>
             </div>
 
             <div className={`mb-key-pod ${dualKeyAuth.surgeon ? 'authenticated' : ''}`}>
               <div className="mb-key-status">
                 <KeyRound size={15} />
-                <span>KEY 02: FLIGHT SURGEON REMOTE UPLINK</span>
+                <span>Key 02: flight surgeon remote uplink</span>
               </div>
-              <strong>{dualKeyAuth.surgeon ? 'CAPCOM MEDICAL SIGN-OFF' : 'AWAITING GROUND SURGEON UPLINK'}</strong>
+              <strong>{dualKeyAuth.surgeon ? 'CAPCOM medical sign-off' : 'Awaiting ground surgeon uplink'}</strong>
               <button
                 className="mb-btn-auth-surgeon"
                 onClick={() => setDualKeyAuth(p => ({ ...p, surgeon: !p.surgeon }))}
               >
-                {dualKeyAuth.surgeon ? 'REVOKE GROUND KEY' : 'SIMULATE GROUND SIGN-OFF'}
+                {dualKeyAuth.surgeon ? 'Revoke ground key' : 'Simulate ground sign-off'}
               </button>
             </div>
           </div>
 
           <div className="mb-dispense-status">
             <div className="mb-dispense-state">
-              <small>DEVICE LOCK STATUS</small>
+              <small>Device lock status</small>
               <strong className={dualKeyAuth.commander && dualKeyAuth.surgeon ? 'unlocked' : 'locked'}>
-                {dualKeyAuth.commander && dualKeyAuth.surgeon ? 'PROTOCOL UNLOCKED · READY FOR REVIEW' : 'HARDWARE INTERLOCK LOCKED'}
+                {dualKeyAuth.commander && dualKeyAuth.surgeon ? 'Protocol unlocked · ready for review' : 'Hardware interlock locked'}
               </strong>
             </div>
 
@@ -489,7 +489,7 @@ export default function MedicalBayScreen() {
               disabled={!(dualKeyAuth.commander && dualKeyAuth.surgeon)}
               onClick={() => setDispensePreview(v => !v)}
             >
-              {dispensePreview ? 'CLOSE PROTOCOL PREVIEW' : 'PREVIEW DISPENSE WORKFLOW'}
+              {dispensePreview ? 'Close protocol preview' : 'Preview dispense workflow'}
             </button>
           </div>
 
@@ -497,7 +497,7 @@ export default function MedicalBayScreen() {
             <div className="mb-preview-panel">
               <AlertTriangle size={16} className="mb-icon-amber" />
               <div>
-                <strong>SIMULATED WORKFLOW PREVIEW ONLY</strong>
+                <strong>Simulated workflow preview only</strong>
                 <p>
                   No autonomous injector, pump, or medication dispenser exists. Real administration is performed manually following strict flight surgeon voice-loop protocols.
                 </p>
@@ -507,7 +507,7 @@ export default function MedicalBayScreen() {
 
           <div className="mb-safety-guardrail">
             <ShieldCheck size={13} />
-            <span>STRICT SAFETY REQUIREMENT: NO AUTONOMOUS MEDICATION INJECTION OR DRUG DELIVERY IS IMPLEMENTED</span>
+            <span>Strict safety requirement: no autonomous medication injection or drug delivery is implemented</span>
           </div>
         </div>
 
